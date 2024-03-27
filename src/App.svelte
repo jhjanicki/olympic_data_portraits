@@ -46,13 +46,6 @@
     gWidth = select("#wrapper").node().getBBox().width;
     gHeight = select("#wrapper").node().getBBox().height;
 
-    // const dims = ids.map((d) => {
-    //   let elWidth = d3.select(d).node().getBBox().width;
-    //   let elHeight = d3.select(d).node().getBBox().height;
-    //   console.log(elWidth);
-    //   return { elWidth, elHeight };
-    // });
-
     // Calculate translation values to center the <g> element
     translateX = (width - gWidth) / 2 - select("#wrapper").node().getBBox().x;
     translateY = (height - gHeight) / 2 - select("#wrapper").node().getBBox().y;

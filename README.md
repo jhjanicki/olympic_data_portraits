@@ -1,47 +1,38 @@
-# Svelte + Vite
+# Olympic data portraits
 
-This template should help get you started developing with Svelte in Vite.
+WIP
 
-## Recommended IDE Setup
+## Notes to Jeremy
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+1. prepare JSON with list of questions and answers for each shape (refer to **questionsData.js**), with the following attributes, this is for the interactive part of the logo and also for the make your own portrait part: **(TODO)**
+      - id: currently I'm using the color of the shape i.e. pink, blue, etc (keep the same id as the one in logoData so I can link the shape to the question)
+      - question: the question associated with a color / shape
+      - question_id: give each question an id so later on can filter the athlete's shapes by it, i.e. "question1"
+      - answers: currently it's an array of the list of possible answers to show up in the dropdown menu, but I think we should make it an array of objects, with each object having an "answer" attribute showing the text, and a "path" or "paths" attribute that stores the svg path of the associated answer
 
-## Need an official Svelte framework?
+      [{"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]},
+       {"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]},
+       {"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]}]
+        
+3. Update logo JSON data (refer to **logoData.js**).  It's mainly prepared but you need to add a "text" attribute for each object.  Here are all the attributes:
+      - text: the text to show up by the shape, i.e. hobbies **(TODO)**
+      - id: currently I'm using the color of the shape i.e. pink, blue, etc 
+      - color: the hex color to use as the fill of the paths
+      - paths: array with the paths in a shape (only the orange shape has two paths)
+        
+4. For the make your own portrait section:
+      - let me know the final list of questions and answers, if it's the same as the athletes we can just use the questionsData.js
+      - I need a general layout of where each shape will go, and a json file of all the questions with all possible answers and the associated path(s) (maybe we can call it **yourPortrait.js**)
+            - question_id
+            - answers:
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+        [{"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}},
+        {"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}},
+        {"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}}]
 
-## Technical considerations
-
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**)
+      - name: name of athlete
+      - sport: sport of athele
+      - class: to link all the shapes associated to the same question (i.e. all the orange shapes) across all athletes.  i.e. "orange"
+      - answers: to store the answer for a specific question, can be an array with question_id and answer such as ["question_id":"","answer":""]
+    

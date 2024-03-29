@@ -22,17 +22,19 @@ WIP
         
 4. For the make your own portrait section:
       - let me know the final list of questions and answers, if it's the same as the athletes we can just use the questionsData.js
-      - I need a general layout of where each shape will go, and a json file of all the questions with all possible answers and the associated path(s) (maybe we can call it **yourPortrait.js**)
-            - question_id
-            - answers:
+      - I need a general layout of where each shape will go, and a json file of all the questions with all possible answers and the associated path(s) (maybe we can call it **yourPortrait.js**) **(TODO)**
 
-        [{"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}},
-        {"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}},
-        {"question":"","anwsers":{"answer":"", "paths":[], "answerID":""},{"answer":"", "paths":[], "answerID":""}}]
+        [{"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}},
+        {"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}},
+        {"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}}]
 
-5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**)
+5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**) **(TODO)**
       - name: name of athlete
       - sport: sport of athele
       - class: to link all the shapes associated to the same question (i.e. all the orange shapes) across all athletes.  i.e. "orange"
-      - answers: to store the answer for a specific question, can be an array with question_id and answer such as ["question_id":"","answer":""]
+      - questions: list of all questions, and for each question the athlete's answer and the shape's paths
+  
+        [{"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]},
+        {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]},
+        {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]}]
     

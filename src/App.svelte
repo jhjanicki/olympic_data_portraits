@@ -1,27 +1,24 @@
 <script>
+  import { logoData } from "./assets/data/logoData";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { select } from "d3";
   import Dropdown from "./lib/Dropdown.svelte";
-  import { svgData } from "./assets/data/svgData";
 
   import {
     selectedAnswers,
     selectedQuestion,
-    questions,
     data,
     shapeClicked,
     shapeClickedOnce,
   } from "./store/store";
 
-  console.log($questions);
-
   let width = 1000;
   let height = 1000;
-  let gWidth;
+  let gWidth; // need to make this responsive
   let gHeight;
-  let translateX;
+  let translateX; // need to make this responsive
   let translateY;
   const ids = [
     "#blue",
@@ -39,7 +36,7 @@
   const numberOfObjects = ids.length;
 
   // Define the radius of the circle
-  const radius = 200;
+  const radius = 180;
 
   // Calculate the angle between each object
   const angleIncrement = (2 * Math.PI) / numberOfObjects;
@@ -57,26 +54,26 @@
     positions.push({ x, y });
   }
 
-  console.log(positions);
-
   onMount(() => {
-    gWidth = select("#wrapper").node().getBBox().width;
-    gHeight = select("#wrapper").node().getBBox().height;
+    gWidth = select("#gWrapper").node().getBBox().width;
+    gHeight = select("#gWrapper").node().getBBox().height;
 
     // Calculate translation values to center the <g> element
-    translateX = (width - gWidth) / 2 - select("#wrapper").node().getBBox().x;
-    translateY = (height - gHeight) / 2 - select("#wrapper").node().getBBox().y;
+    translateX = (width - gWidth) / 2 - select("#gWrapper").node().getBBox().x;
+    translateY =
+      (height - gHeight) / 2 - select("#gWrapper").node().getBBox().y;
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // pin the logo
     ScrollTrigger.create({
       trigger: "#headerSection",
       start: "top top",
       end: "bottom 150px",
       pin: "#svg",
-      // markers: true,
     });
 
+    // fade out title on scroll
     gsap.to("#title", {
       opacity: 0,
       scrollTrigger: {
@@ -87,6 +84,7 @@
       },
     });
 
+    // fade in dropdown / instructions on scroll
     gsap.to("#dropdownWrapper", {
       opacity: 1,
       scrollTrigger: {
@@ -98,6 +96,7 @@
       },
     });
 
+    // remove dropdown as scrolling to next section
     gsap.to("#dropdownWrapper", {
       opacity: 0,
       scrollTrigger: {
@@ -108,16 +107,17 @@
       },
     });
 
+    // animate shapes on scroll
     ids.forEach((d, i) => {
-      // d3.select(d).attr(
+      // select(d).attr(
       //   "transform",
       //   `translate(${positions[i].x},${positions[i].y})`
       // );
       gsap.to(d, {
-        x: "+=" + positions[i].x,
-        y: "+=" + positions[i].y,
+        x: positions[i].x,
+        y: positions[i].y,
         rotation: 180,
-        scale: 0.5,
+        scale: 0.6,
         ease: "none",
         onComplete: () => {
           console.log("beep boop");
@@ -134,6 +134,7 @@
     });
   });
 
+  // update question when user clicks on a shape
   const updateQuestion = (id) => {
     $shapeClicked = true;
     $shapeClickedOnce = true;
@@ -144,13 +145,15 @@
 
 <section id="headerSection">
   <div id="titeWrapper">
-    <h1 id="title">Data portraits of French Olympic and Paralympic athletes</h1>
+    <h1 class="title" id="title">
+      Data portraits of French Olympic and Paralympic athletes
+    </h1>
   </div>
   <div id="chartWrapper">
     <div id="chart" bind:clientWidth={width} bind:clientHeight={height}>
       <svg id="svg">
         <g
-          id="wrapper"
+          id="gWrapper"
           transform={translateX && translateY
             ? `translate(${translateX}, ${translateY})`
             : ""}
@@ -161,7 +164,7 @@
               style="stroke:#d9ac4e;stroke-miterlimit:10;stroke-width:.89px;fill:none"
             />
           </g>
-          {#each svgData as d}
+          {#each logoData as d}
             <g
               id={d.id}
               on:click={() => updateQuestion(d.id)}
@@ -184,14 +187,14 @@
   </div>
 </section>
 <section id="nextSection">
-  <p>next section</p>
+  <h1 class="title" id="title2">Make your own portrait</h1>
 </section>
 
 <style>
   #chart {
     width: 100%;
   }
-  svg {
+  #svg {
     display: block;
     width: 100vw;
     height: 100vh;
@@ -200,7 +203,6 @@
   }
 
   #titeWrapper {
-    text-align: center;
     max-width: 450px;
     position: fixed;
     top: 50px;
@@ -208,21 +210,23 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    color: #a2804b;
   }
 
-  #title {
-    font-weight: 400;
+  .title {
+    color: #a2804b;
+    text-align: center;
+  }
+
+  #title2 {
+    padding: 50px 0px;
   }
 
   #dropdownWrapper {
     opacity: 0;
     position: fixed;
     top: 250px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   #nextSection {

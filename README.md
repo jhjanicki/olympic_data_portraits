@@ -4,6 +4,8 @@ WIP
 
 ## Notes to Jeremy
 
+all data files in **src/assets/data**
+
 1. prepare JSON with list of questions and answers for each shape (refer to **questionsData.js**), with the following attributes, this is for the interactive part of the logo and also for the make your own portrait part: **(TODO)** For April 27
       - id: currently I'm using the color of the shape i.e. pink, blue, etc (keep the same id as the one in logoData so I can link the shape to the question)
       - question: the question associated with a color / shape

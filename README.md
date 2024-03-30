@@ -26,9 +26,9 @@ all data files in **src/assets/data**
       - let me know the final list of questions and answers, if it's the same as the athletes we can just use the questionsData.js
       - I need a general layout of where each shape will go, and a json file of all the questions with all possible answers and the associated path(s) (maybe we can call it **yourPortrait.js**) **(TODO)** For April 27
 
-        [{"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}},
-        {"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}},
-        {"question":"","question_id":"","anwsers":{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}}]
+        [{"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]},
+        {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]},
+        {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]}]
 
 5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**) **(TODO)** For May 27
       - name: name of athlete

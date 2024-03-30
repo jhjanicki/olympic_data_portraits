@@ -4,8 +4,6 @@
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { select } from "d3";
-  import Dropdown from "./lib/Dropdown.svelte";
-  import MakePortraits from "./lib/MakePortraits.svelte";
 
   import {
     selectedAnswers,
@@ -45,8 +43,6 @@
   // Initialize an array to store the positions of the objects
   const positions = [];
 
-  let hovered;
-
   // Calculate the positions using sine and cosine
   for (let i = 0; i < numberOfObjects; i++) {
     const angle = i * angleIncrement;
@@ -79,19 +75,8 @@
       pin: "#svg",
     });
 
-    // fade out title on scroll
-    gsap.to("#title", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#headerSection",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-
     // fade in dropdown / instructions on scroll
-    gsap.to("#dropdownWrapper", {
+    gsap.to("#title", {
       opacity: 1,
       scrollTrigger: {
         trigger: "#headerSection",
@@ -103,10 +88,10 @@
     });
 
     // remove dropdown as scrolling to next section
-    gsap.to("#dropdownWrapper", {
+    gsap.to("#title", {
       opacity: 0,
       scrollTrigger: {
-        trigger: "#diySection",
+        trigger: "#next",
         start: "top bottom",
         scrub: true,
         toggleActions: "restart none none reverse",
@@ -171,14 +156,7 @@
             />
           </g>
           {#each logoData as d}
-            <g
-              id={d.id}
-              on:click={() => updateQuestion(d.id)}
-              on:mouseover={() => (hovered = d.id)}
-              stroke={hovered === d.id ? "#000" : ""}
-              on:mouseout={() => (hovered = null)}
-              stroke-width="4px"
-            >
+            <g id={d.id}>
               {#each d.paths as path}
                 <path d={path} fill={d.color}></path>
               {/each}
@@ -188,12 +166,10 @@
       </svg>
     </div>
   </div>
-  <div id="dropdownWrapper">
-    <Dropdown />
-  </div>
 </section>
-
-<MakePortraits />
+<section id="next">
+  <p>next</p>
+</section>
 
 <style>
   #chart {
@@ -208,20 +184,19 @@
   }
 
   #titeWrapper {
-    max-width: 450px;
+    max-width: 250px;
     position: fixed;
-    top: 50px;
+    top: 250px;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
   }
 
-  #dropdownWrapper {
+  #title {
     opacity: 0;
-    position: fixed;
-    top: 250px;
-    left: 50%;
-    transform: translateX(-50%);
+  }
+  #next {
+    height: 500px;
   }
 </style>

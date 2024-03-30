@@ -41,12 +41,17 @@
     </ul>
   </div>
 {:else}
-  <p id="clickInstruction">Click on shape</p>
+  <p id="clickInstruction">
+    Each shape represents a question we posed to 14 French athletes related to
+    their professional and personal lives. Click on a shape to see a question
+    and all possible answers.
+  </p>
 {/if}
 
 <style>
   #clickInstruction {
     text-align: center;
+    max-width: 250px;
   }
   .select-menu {
     max-width: 220px;

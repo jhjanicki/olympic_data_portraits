@@ -2,3 +2,8 @@ body{
   font-family: "Lora", serif;
   overflow-x: hidden;
 }
+
+.title {
+  color: #a2804b;
+  text-align: center;
+}

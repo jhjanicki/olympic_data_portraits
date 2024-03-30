@@ -5,6 +5,7 @@
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { select } from "d3";
   import Dropdown from "./lib/Dropdown.svelte";
+  import MakePortraits from "./lib/MakePortraits.svelte";
 
   import {
     selectedAnswers,
@@ -54,6 +55,11 @@
     positions.push({ x, y });
   }
 
+  console.log(positions);
+  positions[0].x = positions[0].x + 70;
+  positions[3].y = positions[3].y + 70;
+  positions[6].x = positions[6].x - 70;
+
   onMount(() => {
     gWidth = select("#gWrapper").node().getBBox().width;
     gHeight = select("#gWrapper").node().getBBox().height;
@@ -100,7 +106,7 @@
     gsap.to("#dropdownWrapper", {
       opacity: 0,
       scrollTrigger: {
-        trigger: "#nextSection",
+        trigger: "#diySection",
         start: "top bottom",
         scrub: true,
         toggleActions: "restart none none reverse",
@@ -186,9 +192,8 @@
     <Dropdown />
   </div>
 </section>
-<section id="nextSection">
-  <h1 class="title" id="title2">Make your own portrait</h1>
-</section>
+
+<MakePortraits />
 
 <style>
   #chart {
@@ -212,25 +217,11 @@
     margin-right: auto;
   }
 
-  .title {
-    color: #a2804b;
-    text-align: center;
-  }
-
-  #title2 {
-    padding: 50px 0px;
-  }
-
   #dropdownWrapper {
     opacity: 0;
     position: fixed;
     top: 250px;
     left: 50%;
     transform: translateX(-50%);
-  }
-
-  #nextSection {
-    height: 500px;
-    background-color: #fefaed;
   }
 </style>

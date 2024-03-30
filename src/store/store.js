@@ -11,3 +11,5 @@ export const shapeClickedOnce = writable(false);
 export const questions = derived(data,$data =>{
     return $data.map(d=>d.question)
 });
+
+export const currentQuestionID = writable(0)

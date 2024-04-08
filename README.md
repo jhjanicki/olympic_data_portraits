@@ -46,7 +46,7 @@ all data files in **src/assets/data**
         {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]},
         {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]}]
 
-      **--> JJ structure**
+       **--> JJ structure**
       question
       question_id
       answers
@@ -66,7 +66,7 @@ all data files in **src/assets/data**
         {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]},
         {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]}]
     
-      **--> JJ structure**
+       **--> JJ structure**
       athlete
       athlete_id
       sport

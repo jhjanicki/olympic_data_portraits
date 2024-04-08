@@ -15,13 +15,29 @@ all data files in **src/assets/data**
       [{"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]},
        {"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]},
        {"id":"", "question":"", "question_id":"", "answers":[{"answer":"","paths":[]},{"answer":"","paths":[]},{"answer":"","paths":[]}]}]
+
+       **--> JJ structure**
+       question
+       question_id
+       answers
+       answer
+       color_hex
+       answer_id
+       paths
         
 3. Update logo JSON data (refer to **logoData.js**).  It's mainly prepared but you need to add a "text" attribute for each object.  Here are all the attributes:
       - text: the text to show up by the shape, i.e. hobbies **(TODO)** For April 27
       - id: currently I'm using the color of the shape i.e. pink, blue, etc 
       - color: the hex color to use as the fill of the paths
       - paths: array with the paths in a shape (only the orange shape has two paths)
-        
+
+       **--> JJ structure**
+       question_text
+       answer
+       color_hex
+       answer_id
+       paths
+
 4. For the make your own portrait section:
       - let me know the final list of questions and answers, if it's the same as the athletes we can just use the questionsData.js
       - I need a general layout of where each shape will go, and a json file of all the questions with all possible answers and the associated path(s) (maybe we can call it **yourPortrait.js**) **(TODO)** For April 27
@@ -29,6 +45,16 @@ all data files in **src/assets/data**
         [{"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]},
         {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]},
         {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]}]
+
+      **--> JJ structure**
+      question
+      question_id
+      answers
+      answer
+      color_hex
+      answer_id
+      paths
+
 
 5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**) **(TODO)** For May 27
       - name: name of athlete
@@ -40,3 +66,14 @@ all data files in **src/assets/data**
         {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]},
         {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]}]
     
+      **--> JJ structure**
+      athlete
+      athlete_id
+      sport
+      sexe
+      questions
+      question_id
+      question
+      answer
+      answer_id
+      paths

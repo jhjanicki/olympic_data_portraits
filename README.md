@@ -47,13 +47,13 @@ all data files in **src/assets/data**
         {"question":"","question_id":"","anwsers":[{"answer":"", "paths":[], "answer_id":""},{"answer":"", "paths":[], "answer_id":""}]}]
 
        **--> JJ structure**
-      question
-      question_id
-      answers
-      answer
-      color_hex
-      answer_id
-      paths
+       question
+       question_id
+       answers
+       answer
+       color_hex
+       answer_id
+       paths
 
 
 5. For the athlete's data portrait section, a JSON file similar to questionsData.js would need to be prepared that includes the svg paths for each athlete (**portraits.js**) **(TODO)** For May 27
@@ -67,13 +67,13 @@ all data files in **src/assets/data**
         {"name":"","sport":"","class":"", "questions": [{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]},{"question":"","answer":"","paths":[]}]}]
     
        **--> JJ structure**
-      athlete
-      athlete_id
-      sport
-      sexe
-      questions
-      question_id
-      question
-      answer
-      answer_id
-      paths
+       athlete
+       athlete_id
+       sport
+       sexe
+       questions
+       question_id
+       question
+       answer
+       answer_id
+       paths

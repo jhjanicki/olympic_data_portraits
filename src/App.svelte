@@ -1,9 +1,11 @@
 <script>
   import { logoData } from "./assets/data/logoData";
+  import { portraitData } from "./assets/data/yourPortrait";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { select } from "d3";
+  import Question from "./lib/Question.svelte";
 
   import {
     selectedAnswers,
@@ -17,20 +19,23 @@
   let height = 1000;
   let gWidth; // need to make this responsive
   let gHeight;
-  let translateX; // need to make this responsive
-  let translateY;
+  $: translateX = 0; // need to make this responsive
+  $: translateY = 0;
   const ids = [
-    "#blue",
-    "#purple",
-    "#yellow",
-    "#pink",
-    "#darkorange",
-    "#orange",
-    "#black1",
-    "#black2",
-    "#brown",
-    "#green",
+    "#failure_logo",
+    "#senses_logo",
+    "#introextra_logo",
+    "#city_logo",
+    "#element_logo",
+    "#palmares_logo",
+    "#strength_logo",
+
+    "#direction_logo",
+    "#personalitly_logo",
   ];
+
+  logoData.map((d) => `#${d.id}`);
+  console.log(ids);
   // Define the number of objects
   const numberOfObjects = ids.length;
 
@@ -51,10 +56,10 @@
     positions.push({ x, y });
   }
 
-  console.log(positions);
-  positions[0].x = positions[0].x + 70;
-  positions[3].y = positions[3].y + 70;
-  positions[6].x = positions[6].x - 70;
+  // console.log(positions);
+  // positions[0].x = positions[0].x + 70;
+  // positions[3].y = positions[3].y + 70;
+  // positions[6].x = positions[6].x - 70;
 
   onMount(() => {
     gWidth = select("#gWrapper").node().getBBox().width;
@@ -111,7 +116,7 @@
         scale: 0.6,
         ease: "none",
         onComplete: () => {
-          console.log("beep boop");
+          // console.log("beep boop");
         },
         transformOrigin: "center center",
         scrollTrigger: {
@@ -132,6 +137,15 @@
     $selectedQuestion = $data.filter((d) => d.id === id)[0].question;
     $selectedAnswers = $data.filter((d) => d.id === id)[0].answers;
   };
+
+  $: console.log(portraitData);
+
+  let portraitData1 = portraitData[0];
+
+  // const updatePosition = (i, num) => {
+  //   let trans = width / 3;
+  //   return `translate(${trans * i},200) scale(0.1)`;
+  // };
 </script>
 
 <section id="headerSection">
@@ -169,16 +183,61 @@
 </section>
 <section id="next">
   <p>next</p>
+
+  <!-- <div id="chartWrapper2">
+    <div id="chart2">
+      <svg id="svg1">
+        <g
+          transform={translateX && translateY
+            ? `translate(${translateX}, ${translateY})`
+            : ""}
+        >
+          {#each portraitData as d}
+            <g id={d.id}>
+              {#each d.answers as a}
+                {#each a.paths as path}
+                  <path d={path} fill={a.color_hex}></path>
+                {/each}
+              {/each}
+            </g>
+          {/each}
+        </g>
+      </svg>
+    </div>
+  </div> -->
+</section>
+
+<section id="">
+  <p>legend</p>
+  <Question />
 </section>
 
 <style>
-  #chart {
+  #chart,
+  #chart2,
+  #chart3 {
     width: 100%;
   }
   #svg {
     display: block;
     width: 100vw;
     height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #svg1 {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #svg2 {
+    display: block;
+    width: 90vw;
+    height: 300px;
     margin-left: auto;
     margin-right: auto;
   }

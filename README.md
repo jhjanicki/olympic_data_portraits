@@ -2,6 +2,9 @@
 
 WIP
 
+Phase 1 deadline: April 27
+Phase 2 deadline: May 27
+
 ## Notes to Jeremy
 
 all data files in **src/assets/data**

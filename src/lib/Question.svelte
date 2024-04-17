@@ -25,15 +25,92 @@
   $: xScale = d3.scaleLinear().domain([0, 100]).range([0, svgWidth]);
   $: yScale = d3.scaleLinear().domain([0, 100]).range([0, svgHeight]);
 
-  $: addPath = (path, color) => {
-    d3.select("#portraitSVG")
-      .append("path")
-      .attr("d", path)
-      .attr("fill", color)
-      .attr(
-        "transform",
-        `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
-      );
+  let selectedElements = [];
+
+  // $: addPath = (path, color, index) => {
+  //   if (!selectedElements.includes(index)) {
+  //     selectedElements.push(index);
+  //     if (path.length <= 1) {
+  //       d3.select("#portraitSVG")
+  //         .append("path")
+  //         .attr("d", path)
+  //         .attr("fill", color)
+  //         .attr("id", `path${index}`)
+  //         .attr(
+  //           "transform",
+  //           `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+  //         );
+  //     } else {
+  //       console.log(path);
+  //       d3.select("#portraitSVG")
+  //         .append("g")
+  //         .attr(
+  //           "transform",
+  //           `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+  //         )
+  //         .attr("id", `path${index}`)
+  //         .selectAll("path")
+  //         .data(path)
+  //         .join("path")
+  //         .attr("d", path)
+  //         .attr("fill", color);
+  //     }
+  //   } else {
+  //     d3.select(`#path${index}`)
+  //       // .transition()
+  //       // .duration(100)
+  //       .attr("d", path)
+  //       .attr("fill", color)
+  //       .attr(
+  //         "transform",
+  //         `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+  //       );
+  //   }
+  // };
+
+  $: addPath = (path, color, index) => {
+    if (!selectedElements.includes(index)) {
+      selectedElements.push(index);
+      if (path.length <= 1) {
+        d3.select("#portraitSVG")
+          .append("g")
+          .attr(
+            "transform",
+            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+          )
+          .attr("id", `path${index}`)
+          .append("path")
+          .attr("d", path)
+          .attr("fill", color);
+      } else {
+        console.log(path);
+        d3.select("#portraitSVG")
+          .append("g")
+          .attr(
+            "transform",
+            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+          )
+          .attr("id", `path${index}`)
+          .selectAll("path")
+          .data(path)
+          .join("path")
+          .attr("d", (d) => d)
+          .attr("fill", color);
+      }
+    } else {
+      d3.select(`#path${index}`)
+        .attr(
+          "transform",
+          `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+        )
+        .selectAll("path")
+        // .transition()
+        // .duration(100)
+        .data(path)
+        .join("path")
+        .attr("d", (d) => d)
+        .attr("fill", color);
+    }
   };
 </script>
 
@@ -44,7 +121,11 @@
   <div class="column middle">
     <div class="row" id="question"><h1>{portraitData1.question}</h1></div>
     <div class="row">
-      <div id="portraitWrapper">
+      <div
+        id="portraitWrapper"
+        bind:clientHeight={svgHeight}
+        bind:clientWidth={svgWidth}
+      >
         <svg id="portraitSVG" width={svgWidth} height={svgHeight}></svg>
       </div>
     </div>
@@ -53,20 +134,28 @@
         <g>
           <g id={portraitData1.id}>
             {#each portraitData1.answers as a, i}
-              {#each a.paths as path}
-                <path
-                  transform={`translate(${((width - margin * 2) / (portraitData1.answers.length + 1)) * i + margin},20) scale(0.25)`}
-                  d={path}
-                  fill={a.color_hex}
-                  on:click={addPath(path, a.color_hex)}
-                ></path>
-                <text
-                  x={((width - margin * 2) /
-                    (portraitData1.answers.length + 1)) *
-                    i}
-                  y="20">{a.answer}</text
-                >
-              {/each}
+              <g>
+                {#each a.paths as path, pathIndex}
+                  <path
+                    transform={width
+                      ? `translate(${((width - margin * 2) / (portraitData1.answers.length + 1)) * i + margin},20) scale(0.25)`
+                      : ""}
+                    d={path}
+                    fill={a.color_hex[pathIndex]}
+                    on:click={addPath(a.paths, a.color_hex, currentIndex)}
+                  ></path>
+
+                  <text
+                    x={width
+                      ? ((width - margin * 2) /
+                          (portraitData1.answers.length + 1)) *
+                        i
+                      : ""}
+                    y="20"
+                    >{a.answer}
+                  </text>
+                {/each}
+              </g>
             {/each}
           </g>
         </g>
@@ -74,12 +163,25 @@
     </div>
   </div>
   <div class="column right">
-    <button on:click={prev}>PREV</button>
-    <button on:click={next}>NEXT</button>
+    <button on:click={prev} class={currentIndex === 0 ? "none" : "show"}
+      >PREV</button
+    >
+    <button
+      on:click={next}
+      class={currentIndex === portraitData.length - 1 ? "none" : "show"}
+      >NEXT</button
+    >
   </div>
 </div>
 
 <style>
+  .none {
+    display: none;
+  }
+
+  .show {
+    display: inherit;
+  }
   #legend {
     width: 100%;
   }
@@ -89,6 +191,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
   }
 
   .column {

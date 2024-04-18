@@ -95,7 +95,7 @@
           .data(path)
           .join("path")
           .attr("d", (d) => d)
-          .attr("fill", color);
+          .attr("fill", (d, i) => color[i]);
       }
     } else {
       d3.select(`#path${index}`)
@@ -109,7 +109,7 @@
         .data(path)
         .join("path")
         .attr("d", (d) => d)
-        .attr("fill", color);
+        .attr("fill", (d, i) => color[i]);
     }
   };
 </script>

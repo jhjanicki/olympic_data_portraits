@@ -2,7 +2,7 @@ export const portraitData = [
    {
       "question":"Quelle ville d'\u00e9voque le plus de souvenirs ?",
       "question_id":"city",
-      "x":30,
+      "x":35,
       "y":60,
       "scale":0.5,
       "nav_index":1,
@@ -41,7 +41,7 @@ export const portraitData = [
       "question_id":"personality",
       "x":40,
       "y":30,
-      "scale":0.6,
+      "scale":0.8,
       "nav_index":2,
       "answers":[
          {
@@ -74,8 +74,8 @@ export const portraitData = [
    {
       "question":"Face a\u0300 l'e\u0301chec, je suis pluto\u0302t",
       "question_id":"failure",
-      "x":30,
-      "y":50,
+      "x":28,
+      "y":40,
       "scale":0.5,
       "nav_index":1,
       "answers":[
@@ -110,7 +110,7 @@ export const portraitData = [
       "question_id":"introextra",
       "x":50,
       "y":50,
-      "scale":0.4,
+      "scale":0.5,
       "nav_index":1,
       "answers":[
          {
@@ -134,7 +134,7 @@ export const portraitData = [
    {
       "question":"Tu es pluto\u0302t du genre a\u0300 voir",
       "question_id":"fullempty",
-      "x":60,
+      "x":56,
       "y":20,
       "scale":0.4,
       "nav_index":1,
@@ -161,8 +161,8 @@ export const portraitData = [
       "question":"Quel est ton sens le plus de\u0301veloppe\u0301 ?",
       "question_id":"senses",
       "x":60,
-      "y":30,
-      "scale":0.6,
+      "y":40,
+      "scale":0.5,
       "nav_index":2,
       "answers":[
          {
@@ -294,10 +294,10 @@ export const portraitData = [
    {
       "question":"Ta force dans la pratique est plut\u00f4t bas\u00e9e sur",
       "question_id":"strength_myop",
-      "x":20,
-      "y":40,
+      "x":25,
+      "y":43,
       "scale":0.5,
-      "nav_index":0,
+      "nav_index":1,
       "answers":[
          {
             "answer":"La technique",

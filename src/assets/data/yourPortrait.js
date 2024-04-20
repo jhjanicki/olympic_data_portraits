@@ -5,7 +5,7 @@ export const portraitData = [
       "x":30,
       "y":60,
       "scale":0.5,
-      "legend_index":1,
+      "nav_index":1,
       "answers":[
          {
             "answer":"Rio",
@@ -42,7 +42,7 @@ export const portraitData = [
       "x":40,
       "y":30,
       "scale":0.6,
-      "legend_index":2,
+      "nav_index":2,
       "answers":[
          {
             "answer":"Talentueux",
@@ -77,7 +77,7 @@ export const portraitData = [
       "x":30,
       "y":50,
       "scale":0.5,
-      "legend_index":1,
+      "nav_index":1,
       "answers":[
          {
             "answer":"Effondre\u0301.e",
@@ -111,7 +111,7 @@ export const portraitData = [
       "x":50,
       "y":50,
       "scale":0.4,
-      "legend_index":1,
+      "nav_index":1,
       "answers":[
          {
             "answer":"Introverti.e",
@@ -137,7 +137,7 @@ export const portraitData = [
       "x":60,
       "y":20,
       "scale":0.4,
-      "legend_index":1,
+      "nav_index":1,
       "answers":[
          {
             "answer":"Le verre a\u0300 moitie\u0301 plein",
@@ -163,7 +163,7 @@ export const portraitData = [
       "x":60,
       "y":30,
       "scale":0.6,
-      "legend_index":2,
+      "nav_index":2,
       "answers":[
          {
             "answer":"Ou\u00efe",
@@ -219,7 +219,7 @@ export const portraitData = [
       "x":30,
       "y":20,
       "scale":0.4,
-      "legend_index":0,
+      "nav_index":0,
       "answers":[
          {
             "answer":"Eau",
@@ -263,7 +263,7 @@ export const portraitData = [
       "x":50,
       "y":10,
       "scale":0.6,
-      "legend_index":0,
+      "nav_index":0,
       "answers":[
          {
             "answer":"Plus loin",
@@ -297,7 +297,7 @@ export const portraitData = [
       "x":20,
       "y":40,
       "scale":0.5,
-      "legend_index":0,
+      "nav_index":0,
       "answers":[
          {
             "answer":"La technique",
@@ -331,7 +331,7 @@ export const portraitData = [
       "x":50,
       "y":65,
       "scale":0.55,
-      "legend_index":0,
+      "nav_index":0,
       "answers":[
          {
             "answer":"Fashion Week",
@@ -357,7 +357,7 @@ export const portraitData = [
       "x":45,
       "y":75,
       "scale":0.5,
-      "legend_index":0,
+      "nav_index":0,
       "answers":[
          {
             "answer":"Tenue de gala",

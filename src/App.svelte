@@ -141,11 +141,6 @@
   $: console.log(portraitData);
 
   let portraitData1 = portraitData[0];
-
-  // const updatePosition = (i, num) => {
-  //   let trans = width / 3;
-  //   return `translate(${trans * i},200) scale(0.1)`;
-  // };
 </script>
 
 <section id="headerSection">
@@ -183,32 +178,9 @@
 </section>
 <section id="next">
   <p>next</p>
-
-  <!-- <div id="chartWrapper2">
-    <div id="chart2">
-      <svg id="svg1">
-        <g
-          transform={translateX && translateY
-            ? `translate(${translateX}, ${translateY})`
-            : ""}
-        >
-          {#each portraitData as d}
-            <g id={d.id}>
-              {#each d.answers as a}
-                {#each a.paths as path}
-                  <path d={path} fill={a.color_hex}></path>
-                {/each}
-              {/each}
-            </g>
-          {/each}
-        </g>
-      </svg>
-    </div>
-  </div> -->
 </section>
 
 <section id="">
-  <p>legend</p>
   <Question />
 </section>
 

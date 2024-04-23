@@ -5,9 +5,11 @@
   import { onMount } from "svelte";
   import gsap from "gsap";
   import Draggable from "gsap/Draggable";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   onMount(() => {
     gsap.registerPlugin(Draggable);
+    gsap.registerPlugin(ScrollTrigger);
   });
 
   function updatePosition() {
@@ -16,7 +18,6 @@
     const y = this.y;
 
     let currScale = +("0." + this.target.id.split("_")[1]);
-    console.log(currScale);
     // Update the SVG path's transform attribute to move it
     this.target.setAttribute(
       "transform",
@@ -316,6 +317,10 @@
     height: 100%;
   }
 
+  path.legend:hover {
+    cursor: pointer;
+  }
+
   .column {
     height: 100vh; /* Height of the container */
   }
@@ -339,14 +344,18 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 10vw 70vw 20vw;
-    /* grid-template-columns: 20% 60% 20%;  */
-    /* 10% for the first and third columns, and 80% for the middle column */
-    /* grid-template-rows: 15% 60% 25%;  */
-    /* 15% for the first row, 60% for the middle row, and 25% for the third row */
-    gap: 10px; /* Optional: Add gap between grid items */
+    grid-template-columns: 2vw 78vw 20vw;
+    gap: 10px;
   }
-  path.legend:hover {
-    cursor: pointer;
+
+  @media (max-width: 700px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* Single column layout */
+    }
+
+    .left,
+    .right {
+      display: none; /* Hide the third column */
+    }
   }
 </style>

@@ -1,6 +1,5 @@
 <script>
   import { logoData } from "./assets/data/logoData";
-  import { portraitData } from "./assets/data/yourPortrait";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -29,13 +28,11 @@
     "#element_logo",
     "#palmares_logo",
     "#strength_logo",
-
     "#direction_logo",
     "#personalitly_logo",
   ];
 
   logoData.map((d) => `#${d.id}`);
-  console.log(ids);
   // Define the number of objects
   const numberOfObjects = ids.length;
 
@@ -56,10 +53,12 @@
     positions.push({ x, y });
   }
 
-  // console.log(positions);
-  // positions[0].x = positions[0].x + 70;
-  // positions[3].y = positions[3].y + 70;
-  // positions[6].x = positions[6].x - 70;
+  positions[0].y = positions[0].y + 20;
+  positions[3].y = positions[3].y - 20;
+  positions[5].x = positions[5].x + 40;
+  positions[6].y = positions[6].y - 100;
+  positions[7].y = positions[7].y - 70;
+  positions[8].x = positions[8].x + 30;
 
   onMount(() => {
     gWidth = select("#gWrapper").node().getBBox().width;
@@ -92,11 +91,11 @@
       },
     });
 
-    // remove dropdown as scrolling to next section
+    // remove dropdown as scrolling to intro section
     gsap.to("#title", {
       opacity: 0,
       scrollTrigger: {
-        trigger: "#next",
+        trigger: "#introWrapper",
         start: "top bottom",
         scrub: true,
         toggleActions: "restart none none reverse",
@@ -105,19 +104,13 @@
 
     // animate shapes on scroll
     ids.forEach((d, i) => {
-      // select(d).attr(
-      //   "transform",
-      //   `translate(${positions[i].x},${positions[i].y})`
-      // );
       gsap.to(d, {
         x: positions[i].x,
         y: positions[i].y,
         rotation: 180,
         scale: 0.6,
         ease: "none",
-        onComplete: () => {
-          // console.log("beep boop");
-        },
+        onComplete: () => {},
         transformOrigin: "center center",
         scrollTrigger: {
           trigger: "#svg",
@@ -138,9 +131,12 @@
     $selectedAnswers = $data.filter((d) => d.id === id)[0].answers;
   };
 
-  $: console.log(portraitData);
-
-  let portraitData1 = portraitData[0];
+  const start = () => {
+    select("#headerSection").style("display", "none");
+    select("#introWrapper").style("display", "none");
+    select("#questionWrapper").style("display", "inherit");
+    select("body").style("margin", 0);
+  };
 </script>
 
 <section id="headerSection">
@@ -176,11 +172,17 @@
     </div>
   </div>
 </section>
-<section id="next">
-  <p>next</p>
+<section id="introWrapper">
+  <p>Introduce project</p>
+
+  <div class="scroll-arrow">
+    ↓<br />
+    <span class="arrow-text">CREATE YOUR OWN DATA PORTRAIT</span>
+  </div>
+  <p id="start" class="button" on:click={start}>start</p>
 </section>
 
-<section id="">
+<section id="questionWrapper">
   <Question />
 </section>
 
@@ -217,7 +219,7 @@
   #titeWrapper {
     max-width: 250px;
     position: fixed;
-    top: 250px;
+    top: calc(50% - 80px);
     left: 0;
     right: 0;
     margin-left: auto;
@@ -227,7 +229,61 @@
   #title {
     opacity: 0;
   }
-  #next {
-    height: 500px;
+  #introWrapper {
+    height: 400px;
+    text-align: center;
+  }
+
+  #questionWrapper {
+    display: none;
+    margin-top: 0px;
+  }
+
+  .scroll-arrow {
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    animation: arrowAnim 5s ease-in-out infinite;
+    color: black;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .arrow-text {
+    display: inline-block;
+    animation: blink 5s ease-in-out infinite;
+  }
+
+  @keyframes arrowAnim {
+    0%,
+    100% {
+      transform: translateY(1rem);
+    }
+    50% {
+      transform: translateY(-1rem);
+    }
+  }
+
+  .button {
+    margin: 50px auto 40px auto;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    width: 100px;
+    text-align: center;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .button:hover {
+    transition: all 0.5s ease;
+    background-color: black;
+    color: white;
+    cursor: pointer;
   }
 </style>

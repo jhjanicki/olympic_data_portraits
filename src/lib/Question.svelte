@@ -1,11 +1,14 @@
 <script>
   import { portraitData } from "../assets/data/yourPortrait";
+  import { modalOpen } from "../store/store";
+  import Modal from "./Modal.svelte";
   import html2canvas from "html2canvas";
   import * as d3 from "d3";
   import { onMount } from "svelte";
   import gsap from "gsap";
   import Draggable from "gsap/Draggable";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { select } from "d3";
 
   onMount(() => {
     gsap.registerPlugin(Draggable);
@@ -132,16 +135,32 @@
     d3.select("#legend").style("opacity", 0.1).style("pointer-events", "none");
     d3.select("#prev").style("opacity", 0.1).style("pointer-events", "none");
     d3.select("#finish").style("opacity", 0).style("pointer-events", "none");
+    d3.select("#finishArrow")
+      .style("opacity", 0)
+      .style("pointer-events", "none");
+  };
+
+  const back = () => {
+    select("#headerSection").style("display", "inherit");
+    select("#introWrapper").style("display", "inherit");
+    select("#questionWrapper").style("display", "none");
+  };
+
+  const openAbout = () => {
+    $modalOpen = true;
   };
 
   let hoveredLegendPath = null;
 </script>
 
-<!-- <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} /> -->
-
+<Modal />
 <div class="grid-container" bind:clientHeight={height} bind:clientWidth={width}>
   <div class="column left"></div>
   <div class="column middle">
+    <div class="row" id="arrowsWrapper">
+      <p class="arrow" id="backArrow" on:click={back}>← Page d'accueil</p>
+      <p class="arrow" id="aboutArrow" on:click={openAbout}>À propos →</p>
+    </div>
     <div class="row" id="question"><h1>{portraitData1.question}</h1></div>
     <div class="row" id="main">
       <div
@@ -152,19 +171,32 @@
         <svg id="portraitSVG" width={svgWidth} height={svgHeight}></svg>
       </div>
       <div id="editWrapper">
-        <div
-          id="finish"
-          class={currentIndex === portraitData.length - 1
-            ? "show button"
-            : "none button"}
-          on:click={editPath}
-        >
-          FINISH
+        <div>
+          <div
+            id="finishArrow"
+            class={currentIndex === portraitData.length - 1
+              ? "show arrow"
+              : "none arrow"}
+          >
+            →
+          </div>
+          <div
+            id="finish"
+            class={currentIndex === portraitData.length - 1
+              ? "show button arrow"
+              : "none button arrow"}
+            on:click={editPath}
+          >
+            Terminer
+          </div>
         </div>
+
         <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
-          <h3>Drag shape to repoosition it</h3>
+          <h3 id="instructions">
+            Fais glisser les formes pour les repositionner
+          </h3>
           <div id="download" class="button" on:click={captureScreenshot}>
-            Download
+            Télécharger
           </div>
         </div>
       </div>
@@ -196,7 +228,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? `translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},20) scale(0.25)`
+                    ? `translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -215,9 +247,11 @@
                 <text
                   x={width
                     ? ((width - 50 * 2) / (portraitData1.answers.length + 1)) *
-                      i
+                        i +
+                      50
                     : ""}
                   y="20"
+                  font-size="18"
                   >{a.answer}
                 </text>
               {/each}
@@ -237,12 +271,12 @@
         {#each portraitData as d, i}
           <path
             transform={navWidth
-              ? `translate(${navWidth / 2 - 30},${(navHeight / portraitData.length) * i + 20}) scale(0.15)`
+              ? `translate(${navWidth / 2 - 30},${((navHeight - 30) / portraitData.length) * i + 20}) scale(0.15)`
               : ""}
             d={d.answers[d.nav_index].paths[0]}
             fill={i <= currentIndex
               ? d.answers[d.nav_index].color_hex[0]
-              : "black"}
+              : "#D9AC4E "}
           ></path>
         {/each}
       </svg>
@@ -278,6 +312,11 @@
     position: relative;
   }
 
+  #question {
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+  }
+
   #buttonsWrapper {
     position: absolute;
     right: 0;
@@ -290,24 +329,17 @@
     top: 0;
   }
 
-  .button {
-    margin: 0px auto 40px auto;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    width: 100px;
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 16px;
+  .arrow {
+    display: inline-block;
   }
 
-  .button:hover {
-    transition: all 0.5s ease;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+  .arrow:hover {
     cursor: pointer;
   }
 
+  #aboutArrow {
+    margin-left: 20px;
+  }
   #portraitWrapper,
   #portraitSVG,
   #navWrapper {
@@ -317,6 +349,9 @@
     height: 100%;
   }
 
+  #instructions {
+    max-width: 200px;
+  }
   path.legend:hover {
     cursor: pointer;
   }
@@ -324,20 +359,17 @@
   .column {
     height: 100vh; /* Height of the container */
   }
-
-  .left,
   .right {
-    background-color: #f0f0f0;
+    background-color: #faf4e3;
   }
 
   .middle {
     display: grid;
-    grid-template-rows: 10vh 70vh 20vh; /* Height of each row */
+    grid-template-rows: 5vh 10vh 65vh 20vh; /* Height of each row */
   }
 
-  .row {
-    /* background-color: #e7e1ef; */
-    margin-bottom: 5px; /* Optional margin between rows */
+  #finishArrow {
+    animation: arrowAnim 5s ease-in-out infinite;
   }
 
   .grid-container {

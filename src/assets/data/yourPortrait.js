@@ -1,6 +1,6 @@
 export const portraitData = [
    {
-      "question":"Quelle ville d'\u00e9voque le plus de souvenirs ?",
+      "question":"Quelle ville t'\u00e9voque le plus de souvenirs ?",
       "question_id":"city",
       "x":35,
       "y":60,

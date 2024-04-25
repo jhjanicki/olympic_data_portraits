@@ -6,14 +6,6 @@
   import { select } from "d3";
   import Question from "./lib/Question.svelte";
 
-  import {
-    selectedAnswers,
-    selectedQuestion,
-    data,
-    shapeClicked,
-    shapeClickedOnce,
-  } from "./store/store";
-
   let width = 1000;
   let height = 1000;
   let gWidth; // need to make this responsive
@@ -56,7 +48,8 @@
   positions[0].y = positions[0].y + 20;
   positions[3].y = positions[3].y - 20;
   positions[5].x = positions[5].x + 40;
-  positions[6].y = positions[6].y - 100;
+  positions[6].x = positions[6].x - 20;
+  positions[6].y = positions[6].y - 110;
   positions[7].y = positions[7].y - 70;
   positions[8].x = positions[8].x + 30;
 
@@ -123,14 +116,6 @@
     });
   });
 
-  // update question when user clicks on a shape
-  const updateQuestion = (id) => {
-    $shapeClicked = true;
-    $shapeClickedOnce = true;
-    $selectedQuestion = $data.filter((d) => d.id === id)[0].question;
-    $selectedAnswers = $data.filter((d) => d.id === id)[0].answers;
-  };
-
   const start = () => {
     select("#headerSection").style("display", "none");
     select("#introWrapper").style("display", "none");
@@ -141,9 +126,14 @@
 
 <section id="headerSection">
   <div id="titeWrapper">
-    <h1 class="title" id="title">
-      Data portraits of French Olympic and Paralympic athletes
-    </h1>
+    <div class="title" id="title">
+      <h1>Portraits 2024</h1>
+      <h3>Quand l’art et la performance se prennent aux Jeux</h3>
+      <h4>
+        Une exposition de Blandine Pont et Jeremy Wanner, labellisée Olympiade
+        Culturelle
+      </h4>
+    </div>
   </div>
   <div id="chartWrapper">
     <div id="chart" bind:clientWidth={width} bind:clientHeight={height}>
@@ -173,13 +163,26 @@
   </div>
 </section>
 <section id="introWrapper">
-  <p>Introduce project</p>
+  <p class="introText">
+    Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu
+    plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une
+    exposition pensée pour révéler les différentes facettes de 12 athlètes
+    Olympique et Paralympique français.e.s au grand public sous une forme
+    ludique et inédite.
+  </p>
+  <p class="introText">
+    Générés à partir de leurs réponses à un questionnaire au sujet de leur vie
+    sportive et sur des aspects plus personnels, découvrez ces portraits colorés
+    au carrefour entre la science des données et l’art.
+  </p>
 
   <div class="scroll-arrow">
     ↓<br />
-    <span class="arrow-text">CREATE YOUR OWN DATA PORTRAIT</span>
+    <span class="arrow-text"
+      >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
+    </span>
   </div>
-  <p id="start" class="button" on:click={start}>start</p>
+  <div id="start" class="button" on:click={start}>C'est parti!</div>
 </section>
 
 <section id="questionWrapper">
@@ -200,50 +203,45 @@
     margin-right: auto;
   }
 
-  #svg1 {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #svg2 {
-    display: block;
-    width: 90vw;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   #titeWrapper {
     max-width: 250px;
     position: fixed;
-    top: calc(50% - 80px);
+    top: calc(50% - 120px);
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    color: #d9ac4e;
+    text-align: center;
   }
 
   #title {
     opacity: 0;
   }
   #introWrapper {
-    height: 400px;
     text-align: center;
+  }
+
+  .introText {
+    width: 600px;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
   }
 
   #questionWrapper {
     display: none;
     margin-top: 0px;
+    height: 100vh;
   }
 
   .scroll-arrow {
     max-width: 200px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 20px;
     animation: arrowAnim 5s ease-in-out infinite;
     color: black;
     left: 50%;
@@ -257,33 +255,15 @@
     animation: blink 5s ease-in-out infinite;
   }
 
-  @keyframes arrowAnim {
-    0%,
-    100% {
-      transform: translateY(1rem);
-    }
-    50% {
-      transform: translateY(-1rem);
-    }
+  #start {
+    margin-bottom: 50px;
   }
 
-  .button {
-    margin: 50px auto 40px auto;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    width: 100px;
-    text-align: center;
-    display: block;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  .button:hover {
-    transition: all 0.5s ease;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+  @media (max-width: 700px) {
+    .introText {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 </style>

@@ -1,10 +1,12 @@
 <script>
   import { logoData } from "./assets/data/logoData";
+  import { portraitData } from "./assets/data/yourPortrait";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { select } from "d3";
   import Question from "./lib/Question.svelte";
+  import Athletes from "./lib/Athletes.svelte";
 
   let width = 1000;
   let height = 1000;
@@ -73,27 +75,31 @@
     });
 
     // fade in dropdown / instructions on scroll
-    gsap.to("#title", {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#headerSection",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        toggleActions: "restart none none reverse",
-      },
-    });
+    // gsap.to("#title", {
+    //   opacity: 1,
+    //   scrollTrigger: {
+    //     trigger: "#headerSection",
+    //     start: "top top",
+    //     end: "bottom bottom",
+    //     scrub: true,
+    //     toggleActions: "restart none none reverse",
+    //   },
+    // });
 
     // remove dropdown as scrolling to intro section
-    gsap.to("#title", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#introWrapper",
-        start: "top bottom",
-        scrub: true,
-        toggleActions: "restart none none reverse",
-      },
-    });
+    // gsap.to("#title", {
+    //   opacity: 0,
+    //   scrollTrigger: {
+    //     trigger: "#introWrapper",
+    //     start: "top bottom",
+    //     scrub: true,
+    //     toggleActions: "restart none none reverse",
+    //   },
+    // });
+
+    // onEnter: () => {
+    //   select("#titeWrapper").style("position", "absolute");
+    // };
 
     // animate shapes on scroll
     ids.forEach((d, i) => {
@@ -117,22 +123,41 @@
   });
 
   const start = () => {
-    select("#headerSection").style("display", "none");
-    select("#introWrapper").style("display", "none");
-    select("#questionWrapper").style("display", "inherit");
-    select("body").style("margin", 0);
+    // select("#headerSection").style("display", "none");
+    // select("#introWrapper").style("display", "none");
+    // select("#questionWrapper").style("display", "inherit");
+    select("body")
+      .style("margin", 0)
+      .style("overflow-y", "hidden")
+      .style("overflow-x", "hidden");
+  };
+
+  let navWidth = 100;
+  let navHeight = 100;
+  let currentIndex = 0;
+
+  let active = false;
+  let selectedQuestion = "";
+
+  const toggleDropdown = () => {
+    active = !active;
+  };
+
+  const closeDropdown = (question) => {
+    selectedQuestion = question;
+    active = false;
   };
 </script>
 
 <section id="headerSection">
   <div id="titeWrapper">
     <div class="title" id="title">
-      <h1>Portraits 2024</h1>
+      <!-- <h1>Portraits 2024</h1>
       <h3>Quand l’art et la performance se prennent aux Jeux</h3>
       <h4>
         Une exposition de Blandine Pont et Jeremy Wanner, labellisée Olympiade
         Culturelle
-      </h4>
+      </h4> -->
     </div>
   </div>
   <div id="chartWrapper">
@@ -149,6 +174,24 @@
               d="M393.61 250.09c0 24.79.08 49.59-.02 74.39a171.5 171.5 0 0 1-26.39 91.81c-16.99 27.22-40.05 47.79-68.42 62.52a180.913 180.913 0 0 1-52.07 17.48 186.67 186.67 0 0 1-41.02 2.74c-37.22-1.64-71.14-12.99-101.37-34.95a168.545 168.545 0 0 1-43.33-45.75 172.309 172.309 0 0 1-27.55-93.13c.03-50.31-.05-100.61.03-150.91a168.92 168.92 0 0 1 17.08-73.75c3.6-7.42 7.73-14.58 12.34-21.42 16.76-25.09 38.88-44.11 65.57-57.92a182.37 182.37 0 0 1 50.92-17.21c14.19-2.58 28.63-3.52 43.03-2.81 26.67 1.1 52.78 8 76.52 20.22a175.801 175.801 0 0 1 43.34 31.35 163.56 163.56 0 0 1 20.35 24.07 174.087 174.087 0 0 1 26.25 58.7c2.11 8.92 3.51 17.98 4.21 27.12.31 4.15.48 8.33.49 12.49.04 24.99.05 49.98.02 74.98Z"
               style="stroke:#d9ac4e;stroke-miterlimit:10;stroke-width:.89px;fill:none"
             />
+            <text x="140" y="150" fill="#d9ac4e" font-size="24">
+              Portraits 2024
+            </text>
+            <text x="95" y="220" fill="#d9ac4e" font-size="18">
+              Quand l’art et la performance
+            </text>
+            <text x="125" y="245" fill="#d9ac4e" font-size="18"
+              >se prennent aux Jeuxs</text
+            >
+            <text x="100" y="320" fill="#d9ac4e" font-size="16"
+              >Une exposition de Blandine Pont
+            </text>
+            <text x="150" y="340" fill="#d9ac4e" font-size="16"
+              >et Jeremy Wanner,</text
+            >
+            <text x="110" y="360" fill="#d9ac4e" font-size="16"
+              >labellisée Olympiade Culturelle</text
+            >
           </g>
           {#each logoData as d}
             <g id={d.id}>
@@ -175,16 +218,58 @@
     sportive et sur des aspects plus personnels, découvrez ces portraits colorés
     au carrefour entre la science des données et l’art.
   </p>
-
-  <div class="scroll-arrow">
-    ↓<br />
-    <span class="arrow-text"
-      >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
-    </span>
-  </div>
-  <div id="start" class="button" on:click={start}>C'est parti!</div>
 </section>
 
+<section id="explainWrapper">
+  <div class={active ? "select-menu active" : "select-menu"}>
+    <div class="select-menu-button" on:click={toggleDropdown}>
+      <span class="select-menu-text"
+        >{selectedQuestion === ""
+          ? "Select a question"
+          : selectedQuestion}</span
+      >
+      <img id="carrot" class={active ? "flip" : ""} src="carrot.svg" />
+    </div>
+    <ul class="options">
+      {#each portraitData as d, i}
+        <li class="option" on:click={() => closeDropdown(d.question)}>
+          <span class="optionText">{d.question}</span>
+        </li>
+      {/each}
+    </ul>
+  </div>
+
+  <!-- <div class="column right">
+    <div id="navWrapper">
+      <svg id="navSVG" width={width - 400} height={navHeight}>
+        {#each portraitData as d, i}
+          <path
+            transform={width
+              ? `translate(${((width - 400) / portraitData.length) * i + 20},0) scale(0.15)`
+              : ""}
+            d={d.answers[d.nav_index].paths[0]}
+            fill={i <= currentIndex
+              ? d.answers[d.nav_index].color_hex[0]
+              : "#D9AC4E "}
+          ></path>
+        {/each}
+      </svg>
+    </div>
+  </div> -->
+</section>
+
+<section id="athletesWrapper">
+  <Athletes />
+</section>
+<div class="scroll-arrow">
+  ↓<br />
+  <span class="arrow-text"
+    >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
+  </span>
+</div>
+<div id="start" class="button" on:click={start}>C'est parti!</div>
+
+<section></section>
 <section id="questionWrapper">
   <Question />
 </section>
@@ -230,8 +315,13 @@
     font-size: 18px;
   }
 
+  #explainWrapper {
+    margin: 100px 0px;
+    text-align: center;
+  }
+
   #questionWrapper {
-    display: none;
+    /* display: none; */
     margin-top: 0px;
     height: 100vh;
   }
@@ -264,6 +354,102 @@
       width: 90%;
       margin-left: auto;
       margin-right: auto;
+    }
+  }
+
+  .select-menu {
+    max-width: 500px;
+    margin: 0px auto;
+  }
+
+  .select-menu-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* remove default arrow */
+    margin: 18px 0px;
+    border: 1px solid #d2d2d2;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+    background-size: auto;
+  }
+
+  .options {
+    position: absolute;
+    width: 498px;
+    overflow-y: auto;
+    max-height: 295px;
+    padding: 10px;
+    margin-top: -20px;
+    border: 1px solid #d2d2d2;
+    border-radius: 0;
+    background: #fff;
+    z-index: 100;
+    display: none;
+  }
+
+  .option {
+    height: 40px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 5px;
+    background: #fff;
+  }
+
+  .option:hover {
+    background: #d9ac4e;
+    color: #fff;
+  }
+
+  .select-menu.active .options {
+    display: inherit;
+    padding: 0px;
+    display: block;
+    opacity: 0;
+    z-index: 10;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+  }
+
+  #carrot {
+    width: 15px;
+    margin-top: 8px;
+    float: right;
+  }
+
+  .flip {
+    transform: rotate(180deg);
+    transition: 0.3s transform ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 30px, 0);
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+
+    to {
+      transform: translate3d(0, 20px, 0);
+      opacity: 0;
     }
   }
 </style>

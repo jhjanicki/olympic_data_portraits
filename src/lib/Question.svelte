@@ -158,7 +158,7 @@
   <div class="column left"></div>
   <div class="column middle">
     <div class="row" id="arrowsWrapper">
-      <p class="arrow" id="backArrow" on:click={back}>← Page d'accueil</p>
+      <!-- <p class="arrow" id="backArrow" on:click={back}>← Page d'accueil</p> -->
       <p class="arrow" id="aboutArrow" on:click={openAbout}>À propos →</p>
     </div>
     <div class="row" id="question"><h1>{portraitData1.question}</h1></div>
@@ -176,7 +176,7 @@
             id="finishArrow"
             class={currentIndex === portraitData.length - 1
               ? "show arrow"
-              : "none arrow"}
+              : "none2 arrow"}
           >
             →
           </div>
@@ -184,7 +184,7 @@
             id="finish"
             class={currentIndex === portraitData.length - 1
               ? "show button arrow"
-              : "none button arrow"}
+              : "none2 button arrow"}
             on:click={editPath}
           >
             Terminer
@@ -299,6 +299,12 @@
     pointer-events: none;
   }
 
+  .none2 {
+    display: inline-block;
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .show {
     display: inline-block;
     opacity: 1;
@@ -337,9 +343,6 @@
     cursor: pointer;
   }
 
-  #aboutArrow {
-    margin-left: 20px;
-  }
   #portraitWrapper,
   #portraitSVG,
   #navWrapper {
@@ -357,7 +360,7 @@
   }
 
   .column {
-    height: 100vh; /* Height of the container */
+    height: 100dvh; /* Height of the container */
   }
   .right {
     background-color: #faf4e3;
@@ -365,19 +368,22 @@
 
   .middle {
     display: grid;
-    grid-template-rows: 5vh 10vh 65vh 20vh; /* Height of each row */
+    grid-template-rows: 5dvh 10dvh 65dvh 20dvh; /* Height of each row */
   }
 
   #finishArrow {
-    animation: arrowAnim 5s ease-in-out infinite;
+    animation: arrowAnimX 5s ease-in-out infinite;
+    margin-right: 10px;
   }
 
   .grid-container {
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     display: grid;
-    grid-template-columns: 2vw 78vw 20vw;
+    grid-template-columns: 2dvw 78dvw 20dvw;
     gap: 10px;
+    margin-bottom: 0px !important;
+    overflow-y: hidden;
   }
 
   @media (max-width: 700px) {

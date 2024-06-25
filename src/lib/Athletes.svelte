@@ -1,17 +1,22 @@
 <script>
   import { athleteData } from "../assets/data/athleteData.js";
+  import Modal from "./Modal.svelte";
+  import { modalOpen } from "../store/store";
 
   let selectedOption = "Athletes";
-  $: specialClass =
-    selectedOption === "Portraits" || selectedOption === "Equipment"
-      ? "flipPortrait"
-      : "";
+  $: flipClass = selectedOption === "Portraits" ? "flipPortrait" : "";
+
+  const open = () => {
+    $modalOpen = true;
+  };
 </script>
 
+<Modal />
 <div class="mode_container">
   <div class="tw-toggle">
     <div class="option" data-option="1">
       <input
+        checked
         type="radio"
         name="toggle"
         id="option_1"
@@ -22,7 +27,6 @@
     </div>
     <div class="option">
       <input
-        checked
         type="radio"
         name="toggle"
         id="option_2"
@@ -30,16 +34,6 @@
         bind:group={selectedOption}
       />
       <label class="toggle toggle-yes" for="option_2">Portraits</label>
-    </div>
-    <div class="option">
-      <input
-        type="radio"
-        name="toggle"
-        id="option_3"
-        value="Equipment"
-        bind:group={selectedOption}
-      />
-      <label class="toggle toggle-yes" for="option_3">Equipment</label>
     </div>
   </div>
 </div>
@@ -50,23 +44,16 @@
       <img class="names" src={`./people/${d.id}.png`} />
       <img class="sports" src={`./sport/${d.id}.png`} />
       <div class="flip-card item_flip">
-        <div class={`flip-card-inner ${specialClass}`}>
+        <div class={`flip-card-inner ${flipClass}`}>
           <div class="flip-card-front">
-            <!-- {#if selectedOption === "Athletes"} -->
             <img src={`./flip/${d.id}.png`} />
-            <!-- {:else}
-              <img src={`./flip/${d.id}_e.png`} />
-            {/if} -->
           </div>
           <div class="flip-card-back">
-            {#if selectedOption === "Athletes" || selectedOption === "Portraits"}
-              <img src={`./flip/${d.id}_b.png`} />
-            {:else}
-              <img src={`./flip/${d.id}_e.png`} />
-            {/if}
+            <img src={`./flip/${d.id}_b.png`} />
           </div>
         </div>
       </div>
+      <p class="arrow" id="aboutArrow" on:click={open}>see portrait →</p>
     </div>
   {/each}
 </div>
@@ -159,10 +146,10 @@
   }
 
   /* Do an horizontal flip when you move the mouse over the flip box container */
-  .flip-card:hover .flip-card-inner {
+  /* .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
     cursor: pointer;
-  }
+  } */
 
   /* Position the front and back side */
   .flip-card-front,
@@ -200,7 +187,7 @@
     padding: 0px 0px;
     border-radius: 20px;
     position: relative;
-    border: 2px solid black;
+    border: 2px solid #d9ac4e;
   }
 
   .tw-toggle label {
@@ -235,14 +222,25 @@
   }
   .tw-toggle input[value="Portraits"]:checked + label {
     background-color: #d9ac4e;
-  }
-  .tw-toggle input[value="Equipment"]:checked + label {
-    background-color: #d9ac4e;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
 
   .flipPortrait {
     transform: rotateY(180deg);
+  }
+
+  .arrow {
+    display: inline-block;
+    color: black;
+    font-size: 16px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 3;
+  }
+
+  .arrow:hover {
+    cursor: pointer;
   }
 </style>

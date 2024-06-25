@@ -1,7 +1,5 @@
 <script>
   import { portraitData } from "../assets/data/yourPortrait";
-  import { modalOpen } from "../store/store";
-  import Modal from "./Modal.svelte";
   import html2canvas from "html2canvas";
   import * as d3 from "d3";
   import { onMount } from "svelte";
@@ -146,21 +144,13 @@
     select("#questionWrapper").style("display", "none");
   };
 
-  const openAbout = () => {
-    $modalOpen = true;
-  };
-
   let hoveredLegendPath = null;
 </script>
 
-<Modal />
 <div class="grid-container" bind:clientHeight={height} bind:clientWidth={width}>
   <div class="column left"></div>
   <div class="column middle">
-    <div class="row" id="arrowsWrapper">
-      <!-- <p class="arrow" id="backArrow" on:click={back}>← Page d'accueil</p> -->
-      <p class="arrow" id="aboutArrow" on:click={openAbout}>À propos →</p>
-    </div>
+    <div class="row" id="arrowsWrapper"></div>
     <div class="row" id="question"><h1>{portraitData1.question}</h1></div>
     <div class="row" id="main">
       <div
@@ -333,14 +323,6 @@
     position: absolute;
     right: 0;
     top: 0;
-  }
-
-  .arrow {
-    display: inline-block;
-  }
-
-  .arrow:hover {
-    cursor: pointer;
   }
 
   #portraitWrapper,

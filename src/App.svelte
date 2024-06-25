@@ -74,33 +74,6 @@
       pin: "#svg",
     });
 
-    // fade in dropdown / instructions on scroll
-    // gsap.to("#title", {
-    //   opacity: 1,
-    //   scrollTrigger: {
-    //     trigger: "#headerSection",
-    //     start: "top top",
-    //     end: "bottom bottom",
-    //     scrub: true,
-    //     toggleActions: "restart none none reverse",
-    //   },
-    // });
-
-    // remove dropdown as scrolling to intro section
-    // gsap.to("#title", {
-    //   opacity: 0,
-    //   scrollTrigger: {
-    //     trigger: "#introWrapper",
-    //     start: "top bottom",
-    //     scrub: true,
-    //     toggleActions: "restart none none reverse",
-    //   },
-    // });
-
-    // onEnter: () => {
-    //   select("#titeWrapper").style("position", "absolute");
-    // };
-
     // animate shapes on scroll
     ids.forEach((d, i) => {
       gsap.to(d, {
@@ -132,9 +105,11 @@
       .style("overflow-x", "hidden");
   };
 
-  let navWidth = 100;
-  let navHeight = 100;
+  let legendWidth = 550;
+
+  $: dropdownSelected = false;
   let currentIndex = 0;
+  $: portraitData1 = dropdownSelected ? portraitData[currentIndex] : "";
 
   let active = false;
   let selectedQuestion = "";
@@ -143,22 +118,17 @@
     active = !active;
   };
 
-  const closeDropdown = (question) => {
+  const closeDropdown = (question, index) => {
     selectedQuestion = question;
     active = false;
+    currentIndex = index;
+    dropdownSelected = true;
   };
 </script>
 
 <section id="headerSection">
   <div id="titeWrapper">
-    <div class="title" id="title">
-      <!-- <h1>Portraits 2024</h1>
-      <h3>Quand l’art et la performance se prennent aux Jeux</h3>
-      <h4>
-        Une exposition de Blandine Pont et Jeremy Wanner, labellisée Olympiade
-        Culturelle
-      </h4> -->
-    </div>
+    <div class="title" id="title"></div>
   </div>
   <div id="chartWrapper">
     <div id="chart" bind:clientWidth={width} bind:clientHeight={height}>
@@ -221,41 +191,60 @@
 </section>
 
 <section id="explainWrapper">
+  <div class="scroll-arrow">
+    ↓<br />
+    <span class="arrow-text">Explore the questions </span>
+  </div>
   <div class={active ? "select-menu active" : "select-menu"}>
     <div class="select-menu-button" on:click={toggleDropdown}>
       <span class="select-menu-text"
         >{selectedQuestion === ""
-          ? "Select a question"
+          ? "Select a question to see the shapes"
           : selectedQuestion}</span
       >
       <img id="carrot" class={active ? "flip" : ""} src="carrot.svg" />
     </div>
     <ul class="options">
       {#each portraitData as d, i}
-        <li class="option" on:click={() => closeDropdown(d.question)}>
+        <li class="option" on:click={() => closeDropdown(d.question, i)}>
           <span class="optionText">{d.question}</span>
         </li>
       {/each}
     </ul>
   </div>
 
-  <!-- <div class="column right">
-    <div id="navWrapper">
-      <svg id="navSVG" width={width - 400} height={navHeight}>
-        {#each portraitData as d, i}
-          <path
-            transform={width
-              ? `translate(${((width - 400) / portraitData.length) * i + 20},0) scale(0.15)`
-              : ""}
-            d={d.answers[d.nav_index].paths[0]}
-            fill={i <= currentIndex
-              ? d.answers[d.nav_index].color_hex[0]
-              : "#D9AC4E "}
-          ></path>
-        {/each}
-      </svg>
-    </div>
-  </div> -->
+  <div class="legendWrapper">
+    <svg id="legend" width={legendWidth} height={150}>
+      <g id={portraitData1.id}>
+        {#if dropdownSelected}
+          {#each portraitData1.answers as a, i}
+            <g>
+              {#each a.paths as path, pathIndex}
+                <path
+                  class="legend"
+                  transform={width
+                    ? `translate(${(legendWidth / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`
+                    : ""}
+                  d={path}
+                  fill={a.color_hex[pathIndex]}
+                ></path>
+
+                <text
+                  x={width
+                    ? (legendWidth / (portraitData1.answers.length + 1)) * i +
+                      50
+                    : ""}
+                  y="20"
+                  font-size="16"
+                  >{a.answer}
+                </text>
+              {/each}
+            </g>
+          {/each}
+        {/if}
+      </g>
+    </svg>
+  </div>
 </section>
 
 <section id="athletesWrapper">

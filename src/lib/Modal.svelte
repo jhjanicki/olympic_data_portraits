@@ -1,5 +1,11 @@
 <script>
   import { modalOpen } from "../store/store";
+  import { portraitData } from "../assets/data/athletePortraitsOpen";
+
+  let id = "c_dudek";
+
+  let athletePortrait = portraitData.filter((d) => d.id === id)[0];
+  console.log(athletePortrait);
 </script>
 
 <div class="modal {$modalOpen ? 'show' : 'none'}">
@@ -7,30 +13,22 @@
     <span id="closeModal" on:click={(event) => ($modalOpen = false)}
       >&times;</span
     >
-    <p>
-      Ce projet sera exposé pendant les Jeux Olympiques et Paralympiques. Restez
-      connectés pour ne pas le manquer
-    </p>
-    <p>
-      <b>Équipe :</b> <br />Direction artistique : Blandine Pont et Jeremy
-      Wanner
-      <br />
-      Visualisation interactives et web design: Julia H Janicki <br />
-      Modélisation et conception de l’exposition : Antoine Wanner <br />
-      Événements et réseaux sociaux : Sophie Gaonach
-    </p>
-    <p>
-      <b>Contact :</b><br /> https://www.instagram.com/blandinepnt/<br />
-      https://www.instagram.com/oiiwatelier/ <br />Email :
-      portraits_2024@oiiwa.com
-    </p>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+      {#each athletePortrait.portraits as d}
+        <g>
+          {#each d.paths as path, i}
+            <path d={path} fill={d.color[i]}></path>
+          {/each}
+        </g>
+      {/each}</svg
+    >
   </div>
 </div>
 
 <style>
   .modal {
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     left: 0;
     top: 0;
     width: 100%;

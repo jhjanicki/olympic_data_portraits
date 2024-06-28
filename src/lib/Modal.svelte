@@ -1,27 +1,54 @@
 <script>
-  import { modalOpen } from "../store/store";
+  import { modalOpen, selectedAthlete } from "../store/store";
   import { portraitData } from "../assets/data/athletePortraitsOpen";
 
   let id = "c_dudek";
 
-  let athletePortrait = portraitData.filter((d) => d.id === id)[0];
-  console.log(athletePortrait);
+  $: console.log($selectedAthlete);
+
+  $: athletePortrait = portraitData.filter((d) =>
+    $selectedAthlete !== "" ? d.id === $selectedAthlete : d.id === "c_dudek"
+  )[0];
+  let hoveredLegendPath = null;
+  let selectedQuestion = "";
+  let selectedAnswer = "";
+  function clicked(d) {
+    selectedQuestion = d.question;
+    selectedAnswer = d.answer;
+  }
+  function closeModal() {
+    $modalOpen = false;
+    selectedQuestion = "";
+    selectedAnswer = "";
+  }
 </script>
 
 <div class="modal {$modalOpen ? 'show' : 'none'}">
   <div class="modal-content">
-    <span id="closeModal" on:click={(event) => ($modalOpen = false)}
-      >&times;</span
-    >
+    <span id="closeModal" on:click={() => closeModal()}>&times;</span>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
       {#each athletePortrait.portraits as d}
         <g>
           {#each d.paths as path, i}
-            <path d={path} fill={d.color[i]}></path>
+            <path
+              d={path}
+              fill={d.color[i]}
+              stroke={hoveredLegendPath === d ? "black" : "none"}
+              stroke-width={hoveredLegendPath === d ? 5 : 0}
+              on:mouseover={() => (hoveredLegendPath = d)}
+              on:mouseout={() => (hoveredLegendPath = "")}
+              on:click={() => clicked(d)}
+            ></path>
           {/each}
         </g>
+        <!-- <text x="200" y="480" font-size="30">{selectedQuestion}</text>
+        <text x="450" y="550" font-size="30">{selectedAnswer}</text> -->
       {/each}</svg
     >
+    <div id="textWrapper">
+      <p>{selectedQuestion === "" ? "Click on shape" : selectedQuestion}</p>
+      <p>{selectedAnswer}</p>
+    </div>
   </div>
 </div>
 
@@ -96,5 +123,13 @@
     .modal-content {
       width: 80%;
     }
+  }
+
+  #textWrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 250px;
+    text-align: center;
   }
 </style>

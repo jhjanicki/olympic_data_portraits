@@ -1,13 +1,14 @@
 <script>
   import { athleteData } from "../assets/data/athleteData.js";
   import Modal from "./Modal.svelte";
-  import { modalOpen } from "../store/store";
+  import { modalOpen, selectedAthlete } from "../store/store";
 
   let selectedOption = "Athletes";
   $: flipClass = selectedOption === "Portraits" ? "flipPortrait" : "";
 
-  const open = () => {
+  const open = (id) => {
     $modalOpen = true;
+    $selectedAthlete = id;
   };
 </script>
 
@@ -53,7 +54,9 @@
           </div>
         </div>
       </div>
-      <p class="arrow" id="aboutArrow" on:click={open}>see portrait →</p>
+      <p class="arrow" id="aboutArrow" on:click={() => open(d.id)}>
+        see portrait →
+      </p>
     </div>
   {/each}
 </div>

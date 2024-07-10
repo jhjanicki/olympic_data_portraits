@@ -1,9 +1,50 @@
 body{
-  font-family: "Lora", serif;
+  background-color: #FCFBF6;
+  font-family: "Outfit", sans-serif;
   overflow-x: hidden;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
 }
 
-.title {
-  color: #a2804b;
+.button {
+  margin: 30px auto;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  width: 120px;
   text-align: center;
+  display: block;
+  border: 1px solid #d9ac4e;
+  color: #d9ac4e;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.button:hover {
+  transition: all 0.5s ease;
+  background-color: #d9ac4e;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes arrowAnim {
+  0%,
+  100% {
+    transform: translateY(1rem);
+  }
+  50% {
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes arrowAnimX {
+  0%,
+  100% {
+    transform: translateX(0.5rem);
+  }
+  50% {
+    transform: translateX(-0.5rem);
+  }
 }

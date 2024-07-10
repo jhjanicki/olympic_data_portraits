@@ -315,6 +315,10 @@
     height: 100vh;
   }
 
+  #legend{
+    margin: 0px auto;
+  }
+
   .scroll-arrow {
     max-width: 200px;
     margin-left: auto;

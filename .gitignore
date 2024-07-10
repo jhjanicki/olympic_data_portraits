@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Jupyter Notebook
+.ipynb
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*

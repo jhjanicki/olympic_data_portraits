@@ -20,10 +20,20 @@
 
     let currScale = +("0." + this.target.id.split("_")[1]);
     // Update the SVG path's transform attribute to move it
-    this.target.setAttribute(
-      "transform",
-      `translate(${x},${y}) scale(${currScale})`
-    );
+    if(width && width < 700){
+      this.target.setAttribute(
+        "transform",
+        `translate(${x},${y}) scale(${currScale-0.2})`
+      );
+    }else{
+      this.target.setAttribute(
+        "transform",
+        `translate(${x},${y}) scale(${currScale})`
+      );
+    }
+
+
+    console.log(currScale)
   }
 
   let currentIndex = 0;
@@ -53,7 +63,8 @@
   $: xScale = d3
     .scaleLinear()
     .domain([0, 100])
-    .range([margin, svgWidth - margin]);
+    .range(width && width < 700 ? [0, svgWidth] : [margin, svgWidth - margin]);
+
   $: yScale = d3
     .scaleLinear()
     .domain([0, 100])
@@ -74,8 +85,9 @@
     });
   };
 
-  $: addPath = (path, color, index) => {
+  $: addPath = (path, color, index, dataScale) => {
     let currScale = portraitData[currentIndex].scale.toString().split(".")[1];
+    console.log(dataScale)
     if (!selectedElements.includes(index)) {
       selectedElements.push(index);
       if (path.length <= 1) {
@@ -83,7 +95,7 @@
           .append("g")
           .attr(
             "transform",
-            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${dataScale})`
           )
           .attr("id", `path${index}_${currScale}`)
           .attr("class", "draggable-path")
@@ -96,7 +108,7 @@
           .append("g")
           .attr(
             "transform",
-            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+            `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${dataScale})`
           )
           .attr("id", `path${index}_${currScale}`)
           .attr("class", "draggable-path")
@@ -111,7 +123,7 @@
       d3.select(`#path${index}_${currScale}`)
         .attr(
           "transform",
-          `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${portraitData1.scale})`
+          `translate(${xScale(portraitData1.x)},${yScale(portraitData1.y)})  scale(${dataScale})`
         )
         .selectAll("path")
         .data(path)
@@ -145,6 +157,7 @@
   };
 
   let hoveredLegendPath = null;
+
 
 </script>
 
@@ -219,7 +232,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? (width<700?`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`:`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`)
+                    ? (width<700?`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i * 1.3 + 50},40) scale(0.15)`:`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`)
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -227,7 +240,7 @@
                     a.paths,
                     a.color_hex,
                     currentIndex,
-                    portraitData1.scale
+                    (width && width < 700) ? (portraitData1.scale -0.2): portraitData1.scale
                   )}
                   stroke={hoveredLegendPath == a ? "black" : "none"}
                   stroke-width={hoveredLegendPath == a ? 5 : 0}
@@ -237,9 +250,11 @@
 
                 <text
                   x={width
-                    ? ((width - 50 * 2) / (portraitData1.answers.length + 1)) *
+                    ? (width>700?(((width - 50 * 2) / (portraitData1.answers.length + 1)) *
                         i +
-                      50
+                      50):(((width - 50 * 2) / (portraitData1.answers.length + 1)) *
+                          i*1.3 +
+                        50))
                     : ""}
                   y="20"
                   font-size={width && width<700? 14 : 18}
@@ -301,8 +316,9 @@
     opacity: 1;
     pointer-events: all;
   }
+
   #legend {
-    width: 100%;
+    width: 100dvw;
   }
 
   #main {
@@ -333,6 +349,7 @@
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+    width:100%;
   }
 
   #instructions {
@@ -360,7 +377,7 @@
   }
 
   .grid-container {
-    width: 100dvw;
+    width: 100%;
     height: 100dvh;
     display: grid;
     grid-template-columns: 2dvw 78dvw 20dvw;
@@ -371,8 +388,13 @@
   }
 
   @media (max-width: 700px) {
+
+    #buttonsWrapper,#editWrapper {
+      right: 30px;
+    }
     .grid-container {
-      grid-template-columns: 1fr; /* Single column layout */
+      grid-template-columns: 100dvw; /* Single column layout */
+      max-width: 100dvw;
     }
 
     .left,

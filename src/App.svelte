@@ -95,15 +95,6 @@
     });
   });
 
-  const start = () => {
-    // select("#headerSection").style("display", "none");
-    // select("#introWrapper").style("display", "none");
-    // select("#questionWrapper").style("display", "inherit");
-    select("body")
-      .style("margin", 0)
-      .style("overflow-y", "hidden")
-      .style("overflow-x", "hidden");
-  };
 
   let legendWidth = 550;
 
@@ -256,7 +247,6 @@
     >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
   </span>
 </div>
-<div id="start" class="button" on:click={start}>C'est parti!</div>
 
 <section></section>
 <section id="questionWrapper">

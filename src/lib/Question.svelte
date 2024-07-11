@@ -30,7 +30,7 @@
   $: portraitData1 = portraitData[currentIndex];
   let width;
   let height;
-  let svgWidth = 600;
+  let svgWidth = 400;
   let svgHeight = 500;
   let navWidth = 100;
   let navHeight = 100;
@@ -145,6 +145,7 @@
   };
 
   let hoveredLegendPath = null;
+
 </script>
 
 <div class="grid-container" bind:clientHeight={height} bind:clientWidth={width}>
@@ -218,7 +219,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? `translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`
+                    ? (width<700?`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`:`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`)
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -241,7 +242,7 @@
                       50
                     : ""}
                   y="20"
-                  font-size="18"
+                  font-size={width && width<700? 14 : 18}
                   >{a.answer}
                 </text>
               {/each}
@@ -290,7 +291,7 @@
   }
 
   .none2 {
-    display: inline-block;
+    display: none;
     opacity: 0;
     pointer-events: none;
   }
@@ -365,6 +366,7 @@
     grid-template-columns: 2dvw 78dvw 20dvw;
     gap: 10px;
     margin-bottom: 0px !important;
+    overflow-x: hidden; /* Prevent horizontal overflow */
     overflow-y: hidden;
   }
 
@@ -376,6 +378,10 @@
     .left,
     .right {
       display: none; /* Hide the third column */
+    }
+
+    .middle {
+      grid-template-rows: auto; /* Adjust rows in middle column */
     }
   }
 </style>

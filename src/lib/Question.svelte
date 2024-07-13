@@ -158,6 +158,7 @@
 
   let hoveredLegendPath = null;
 
+  $: console.log(svgWidth)
 
 </script>
 
@@ -165,7 +166,7 @@
   <div class="column left"></div>
   <div class="column middle">
     <div class="row" id="arrowsWrapper"></div>
-    <div class="row" id="question"><h1>{portraitData1.question}</h1></div>
+    <div class="row" id="question">{portraitData1.question}</div>
     <div class="row" id="main">
       <div
         id="portraitWrapper"
@@ -232,7 +233,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? (width<700?`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i * 1.3 + 50},40) scale(0.15)`:`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`)
+                    ? (width<700?`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i * 1.3 + 50},40) scale(0.12)`:`translate(${((width - 50 * 2) / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.25)`)
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -257,7 +258,7 @@
                         50))
                     : ""}
                   y="20"
-                  font-size={width && width<700? 14 : 18}
+                  font-size={width && width<700? 12 : 18}
                   >{a.answer}
                 </text>
               {/each}
@@ -316,9 +317,8 @@
     opacity: 1;
     pointer-events: all;
   }
-
   #legend {
-    width: 100dvw;
+    width: 100%;
   }
 
   #main {
@@ -326,6 +326,8 @@
   }
 
   #question {
+    font-size:28px;
+    font-weight:700;
     display: flex;
     align-items: center; /* Vertical center alignment */
   }
@@ -393,9 +395,10 @@
       right: 30px;
     }
     .grid-container {
+      display: inherit;
       grid-template-columns: 100dvw; /* Single column layout */
-      max-width: 100dvw;
     }
+
 
     .left,
     .right {
@@ -404,6 +407,15 @@
 
     .middle {
       grid-template-rows: auto; /* Adjust rows in middle column */
+    }
+
+    #question {
+      margin-top:20px;
+      font-size:18px;
+    }
+
+    .showFinal {
+      margin-top:-60px;
     }
   }
 </style>

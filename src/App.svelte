@@ -184,7 +184,7 @@
 <section id="explainWrapper">
   <div class="scroll-arrow">
     ↓<br />
-    <span class="arrow-text">Explore the questions </span>
+    <span class="arrow-text">Explorez les questions </span>
   </div>
   <div class={active ? "select-menu active" : "select-menu"}>
     <div class="select-menu-button" on:click={toggleDropdown}>
@@ -296,6 +296,7 @@
   #explainWrapper {
     margin: 100px 0px;
     text-align: center;
+    width:100%;
   }
 
   #questionWrapper {
@@ -362,6 +363,7 @@
   }
 
   .options {
+    list-style-type: none;
     position: absolute;
     width: 498px;
     overflow-y: auto;
@@ -435,4 +437,11 @@
       opacity: 0;
     }
   }
+
+  @media (max-width: 498px) {
+    .options{
+      width: calc(100% - 18px);
+    }
+  }
+
 </style>

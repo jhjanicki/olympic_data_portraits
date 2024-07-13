@@ -24,7 +24,7 @@
         value="Athletes"
         bind:group={selectedOption}
       />
-      <label class="toggle toggle-yes" for="option_1">Athletes</label>
+      <label class="toggle toggle-yes" for="option_1">Athlètes</label>
     </div>
     <div class="option">
       <input
@@ -55,7 +55,7 @@
         </div>
       </div>
       <p class="arrow" id="aboutArrow" on:click={() => open(d.id)}>
-        see portrait →
+        portrait ici→
       </p>
     </div>
   {/each}
@@ -238,12 +238,14 @@
     color: black;
     font-size: 16px;
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     left: 10px;
     z-index: 3;
   }
 
   .arrow:hover {
     cursor: pointer;
+    font-weight:600;
+    transition: all 0.5 ease;
   }
 </style>

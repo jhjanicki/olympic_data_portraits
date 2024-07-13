@@ -46,7 +46,7 @@
       {/each}</svg
     >
     <div id="textWrapper">
-      <p>{selectedQuestion === "" ? "Click on shape" : selectedQuestion}</p>
+      <p>{selectedQuestion === "" ? "cliquer sur une forme" : selectedQuestion}</p>
       <p>{selectedAnswer}</p>
     </div>
   </div>
@@ -129,7 +129,13 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 250px;
+    top: 45%;
     text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    #textWrapper {
+      top: 40%;
+    }
   }
 </style>

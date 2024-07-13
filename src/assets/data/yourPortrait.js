@@ -134,8 +134,8 @@ export const portraitData = [
    {
       "question":"Tu es pluto\u0302t du genre a\u0300 voir",
       "question_id":"fullempty",
-      "x":56,
-      "y":20,
+      "x":65,
+      "y":65,
       "scale":0.4,
       "nav_index":1,
       "answers":[
@@ -216,8 +216,8 @@ export const portraitData = [
    {
       "question":"Lequel est ton e\u0301le\u0301ment ?",
       "question_id":"element",
-      "x":30,
-      "y":20,
+      "x":35,
+      "y":35,
       "scale":0.4,
       "nav_index":0,
       "answers":[
@@ -261,7 +261,7 @@ export const portraitData = [
       "question":"Ou\u0300 vas-tu ?",
       "question_id":"direction",
       "x":50,
-      "y":10,
+      "y":45,
       "scale":0.6,
       "nav_index":0,
       "answers":[

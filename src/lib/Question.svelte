@@ -352,8 +352,12 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 100%;
+
     width:100%;
+  }
+
+  #navWrapper{
+  height:100%;
   }
 
   #instructions {

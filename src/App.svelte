@@ -204,8 +204,8 @@
     </ul>
   </div>
 
-  <div class="legendWrapper">
-    <svg id="legend" width={legendWidth} height={150}>
+  <div class="dropdownWrapper">
+    <svg id="dropdownSVG" width={legendWidth} height={150}>
       <g id={portraitData1.id}>
         {#if dropdownSelected}
           {#each portraitData1.answers as a, i}
@@ -214,7 +214,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? `translate(${(legendWidth / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`
+                    ? (width < 700 ? `translate(${((legendWidth-100) / (portraitData1.answers.length + 1)) * i + 20},40) scale(0.1)` :`translate(${(legendWidth / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`)
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -222,11 +222,12 @@
 
                 <text
                   x={width
-                    ? (legendWidth / (portraitData1.answers.length + 1)) * i +
-                      50
+                    ? (width < 700? ((legendWidth-100) / (portraitData1.answers.length + 1)) * i +
+                        20:((legendWidth) / (portraitData1.answers.length + 1)) * i +
+                      50)
                     : ""}
                   y="20"
-                  font-size="16"
+                  font-size={width&&width < 700?12:16}
                   >{a.answer}
                 </text>
               {/each}
@@ -344,7 +345,7 @@
     font-size: 18px;
   }
 
-  #legend{
+  #dropdownSVG{
     margin: 0px auto;
   }
 

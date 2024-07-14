@@ -197,9 +197,9 @@
         </div>
 
         <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
-          <h3 id="instructions">
+          <p id="instructions">
             Fais glisser les formes pour les repositionner
-          </h3>
+          </p>
           <div id="download" class="button" on:click={captureScreenshot}>
             Télécharger
           </div>
@@ -299,6 +299,8 @@
   .showFinal {
     display: inherit;
     pointer-events: all;
+    font-size:24px;
+    font-weight:700;
   }
   .none {
     display: inline-block;
@@ -415,7 +417,13 @@
     }
 
     .showFinal {
-      margin-top:-60px;
+      margin-top:-80px;
+      font-size:16px;
+    }
+
+    #download{
+
+    margin-top:-10px;
     }
   }
 </style>

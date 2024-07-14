@@ -248,8 +248,32 @@
   </span>
 </div>
 
+<div class="portraitsNav" id="topNav">
+  <p>Votre Portrait 2024</p>
+</div>
+
+
 <section id="questionWrapper">
   <Question />
+</section>
+
+<div class="portraitsNav">
+</div>
+
+<section id="aboutWrapper" class="aboutText">
+  <p>Ce projet sera exposé pendant les Jeux Olympiques et Paralympiques. Restez
+      connectés pour ne pas le manquer. </p>
+  <br>
+  <p><b>Équipe :</b></p>
+  <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>
+  <p>Visualisation interactives et web design: Julia H Janicki</p>
+  <p>Modélisation et conception de l’exposition : Antoine Wanner</p>
+  <p>Événements et réseaux sociaux : Sophie Gaonach </p>
+  <br>
+  <p><b>Contact :</b></p>
+  <p> https://www.instagram.com/blandinepnt/</p>
+  <p> https://www.instagram.com/oiiwatelier/</p>
+  <p> Email : portraits_2024@oiiwa.com</p>
 </section>
 
 <style>
@@ -306,6 +330,20 @@
     height: 100vh;
   }
 
+  #aboutWrapper{
+    margin-top:30px;
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .aboutText {
+    width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+  }
+
   #legend{
     margin: 0px auto;
   }
@@ -333,8 +371,28 @@
     margin-bottom: 50px;
   }
 
+  #topNav{
+    margin-top:50px;
+  }
+
+  .portraitsNav{
+    background-color:#d9ac4e;
+    height:30px;
+    width:100%;
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;
+    color: white;
+  }
+
+
   @media (max-width: 700px) {
     .introText {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .aboutText {
       width: 90%;
       margin-left: auto;
       margin-right: auto;

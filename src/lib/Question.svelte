@@ -80,7 +80,7 @@
       const dataURL = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = dataURL;
-      link.download = "screenshot.png";
+      link.download = "my_portrait2024.png";
       link.click();
     });
   };
@@ -198,7 +198,7 @@
 
         <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
           <p id="instructions">
-            Fais glisser les formes pour les repositionner
+            Faites glisser les formes pour les repositionner
           </p>
           <div id="download" class="button" on:click={captureScreenshot}>
             Télécharger

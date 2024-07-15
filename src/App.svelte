@@ -142,7 +142,7 @@
               Quand l’art et la performance
             </text>
             <text x="125" y="245" fill="#d9ac4e" font-size="18"
-              >se prennent aux Jeuxs</text
+              >se prennent aux Jeux</text
             >
             <text x="100" y="320" fill="#d9ac4e" font-size="16"
               >Une exposition de Blandine Pont
@@ -170,8 +170,8 @@
   <p class="introText">
     Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu
     plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une
-    exposition pensée pour révéler les différentes facettes de 12 athlètes
-    Olympique et Paralympique français.e.s au grand public sous une forme
+    exposition pensée pour révéler les différentes facettes de 13 athlètes
+    Olympiques et Paralympiques français.e.s au grand public sous une forme
     ludique et inédite.
   </p>
   <p class="introText">
@@ -262,19 +262,19 @@
 </div>
 
 <section id="aboutWrapper" class="aboutText">
-  <p>Ce projet sera exposé pendant les Jeux Olympiques et Paralympiques. Restez
-      connectés pour ne pas le manquer. </p>
+  <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés! </p>
   <br>
   <p><b>Équipe :</b></p>
   <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>
-  <p>Visualisation interactives et web design: Julia H Janicki</p>
-  <p>Modélisation et conception de l’exposition : Antoine Wanner</p>
-  <p>Événements et réseaux sociaux : Sophie Gaonach </p>
+  <p>Scénographie : Antoine Wanner</p>
+  <p>Visualisation interactives et web design: Julia H. Janicki</p>
+  <p>Motion design : Noémie Joole</p>
+  <p>Communication : Sophie Gaonach </p>
   <br>
   <p><b>Contact :</b></p>
-  <p> https://www.instagram.com/blandinepnt/</p>
-  <p> https://www.instagram.com/oiiwatelier/</p>
-  <p> Email : portraits_2024@oiiwa.com</p>
+  <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">Nous écrire</a></p>
+  <p> <a href="https://www.instagram.com/blandinepnt/">Blandine Pont</a></p>
+  <p> <a href="https://www.instagram.com/oiiwatelier/">Jeremy Wanner</a></p>
 </section>
 
 <style>

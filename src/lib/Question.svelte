@@ -80,7 +80,7 @@
       const dataURL = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = dataURL;
-      link.download = "screenshot.png";
+      link.download = "myPortrait2024.png";
       link.click();
     });
   };

@@ -129,7 +129,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 45%;
+    top: 42%;
     text-align: center;
   }
 

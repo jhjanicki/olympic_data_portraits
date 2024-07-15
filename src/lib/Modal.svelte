@@ -46,7 +46,7 @@
       {/each}</svg
     >
     <div id="textWrapper">
-      <p>{selectedQuestion === "" ? "cliquer sur une forme" : selectedQuestion}</p>
+      <p>{selectedQuestion === "" ? "Cliquez sur une forme" : selectedQuestion}</p>
       <p>{selectedAnswer}</p>
     </div>
   </div>

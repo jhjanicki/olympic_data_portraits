@@ -52,3 +52,12 @@ body{
     transform: translateX(-0.5rem);
   }
 }
+
+a{
+  color:#d9ac4e;
+}
+
+a:hover{
+  font-weight:500;
+  transition: all 0.1s ease;
+}

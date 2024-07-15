@@ -55,7 +55,7 @@
         </div>
       </div>
       <p class="arrow" id="aboutArrow" on:click={() => open(d.id)}>
-        portrait ici→
+        Son portrait ici→
       </p>
     </div>
   {/each}

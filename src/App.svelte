@@ -262,7 +262,7 @@
 </div>
 
 <section id="aboutWrapper" class="aboutText">
-  <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés! </p>
+  <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés ! </p>
   <br>
   <p><b>Équipe :</b></p>
   <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>

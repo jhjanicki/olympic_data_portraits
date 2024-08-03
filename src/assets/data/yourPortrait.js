@@ -74,7 +74,7 @@ export const portraitData = [
    {
       "question":"Face a\u0300 l'e\u0301chec, je suis pluto\u0302t",
       "question_id":"failure",
-      "x":28,
+      "x":30,
       "y":40,
       "scale":0.5,
       "nav_index":1,
@@ -109,7 +109,7 @@ export const portraitData = [
       "question":"Dans la vie tu es pluto\u0302t de nature",
       "question_id":"introextra",
       "x":50,
-      "y":50,
+      "y":60,
       "scale":0.5,
       "nav_index":1,
       "answers":[
@@ -134,7 +134,7 @@ export const portraitData = [
    {
       "question":"Quel est ton sens le plus de\u0301veloppe\u0301 ?",
       "question_id":"senses",
-      "x":60,
+      "x":55,
       "y":40,
       "scale":0.5,
       "nav_index":2,
@@ -190,8 +190,8 @@ export const portraitData = [
    {
       "question":"Lequel est ton e\u0301le\u0301ment ?",
       "question_id":"element",
-      "x":35,
-      "y":35,
+      "x":45,
+      "y":20,
       "scale":0.4,
       "nav_index":0,
       "answers":[
@@ -234,7 +234,7 @@ export const portraitData = [
    {
       "question":"Ou\u0300 vas-tu ?",
       "question_id":"direction",
-      "x":50,
+      "x":35,
       "y":45,
       "scale":0.6,
       "nav_index":0,

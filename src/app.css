@@ -6,9 +6,6 @@ body{
   background-color: #FCFBF6;
   font-family: "Outfit", sans-serif;
   overflow-x: hidden;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
 
 }
 
@@ -24,6 +21,9 @@ body{
   border-radius: 20px;
   font-weight: 600;
   font-size: 16px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .button:hover {
@@ -54,7 +54,7 @@ body{
 }
 
 a{
-  color:#d9ac4e;
+  color:black;
 }
 
 a:hover{

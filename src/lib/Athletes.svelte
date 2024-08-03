@@ -185,7 +185,6 @@
   }
 
   .tw-toggle {
-    /* background: #95A5A6; */
     display: inline-block;
     padding: 0px 0px;
     border-radius: 20px;
@@ -207,7 +206,6 @@
   }
 
   .tw-toggle input {
-    /* display: none; */
     position: absolute;
     z-index: 3;
     opacity: 0;
@@ -227,6 +225,10 @@
     background-color: #d9ac4e;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+  }
+
+  .toggle:hover{
+    cursor: pointer;
   }
 
   .flipPortrait {

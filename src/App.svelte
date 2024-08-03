@@ -258,23 +258,27 @@
   <Question />
 </section>
 
-<div class="portraitsNav">
-</div>
 
 <section id="aboutWrapper" class="aboutText">
-  <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés ! </p>
-  <br>
-  <p><b>Équipe :</b></p>
-  <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>
-  <p>Scénographie : Antoine Wanner</p>
-  <p>Visualisation interactives et web design: Julia H. Janicki</p>
-  <p>Motion design : Noémie Joole</p>
-  <p>Communication : Sophie Gaonach </p>
-  <br>
-  <p><b>Contact :</b></p>
-  <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">Nous écrire</a></p>
-  <p> <a href="https://www.instagram.com/blandinepnt/">Blandine Pont</a></p>
-  <p> <a href="https://www.instagram.com/oiiwatelier/">Jeremy Wanner</a></p>
+  <div class="column">
+      <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés ! </p>
+
+  </div>
+  <div class="column">
+      <p><b>Équipe :</b></p>
+      <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>
+      <p>Scénographie : Antoine Wanner</p>
+      <p>Visualisation interactives et web design: Julia H. Janicki</p>
+      <p>Motion design : Noémie Joole</p>
+      <p>Communication : Sophie Gaonach </p>
+  </div>
+  <div class="column">
+      <p><b>Contact :</b></p>
+      <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">Nous écrire</a></p>
+      <p> <a href="https://www.instagram.com/blandinepnt/">Blandine Pont</a></p>
+      <p> <a href="https://www.instagram.com/oiiwatelier/">Jeremy Wanner</a></p>
+  </div>
+
 </section>
 
 <style>
@@ -332,9 +336,20 @@
   }
 
   #aboutWrapper{
-    margin-top:30px;
-    padding-left:20px;
-    padding-right:20px;
+    width: 100%;
+    background: #d9ac4e;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    text-align:left;
+  }
+
+  #aboutWrapper p{
+    margin:0px;
+  }
+
+  #aboutWrapper .column{
+    padding: 20px;
   }
 
   .aboutText {
@@ -385,7 +400,6 @@
     align-items: center;
     color: white;
   }
-
 
   @media (max-width: 700px) {
     .introText {
@@ -501,6 +515,15 @@
     .options{
       width: calc(100% - 18px);
     }
+
+  }
+
+  @media (max-width: 600px) {
+
+    #aboutWrapper{
+        grid-template-columns: 1fr;
+    }
+    
   }
 
 </style>

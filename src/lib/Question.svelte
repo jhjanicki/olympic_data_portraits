@@ -31,9 +31,6 @@
         `translate(${x},${y}) scale(${currScale})`
       );
     }
-
-
-    console.log(currScale)
   }
 
   let currentIndex = 0;
@@ -47,9 +44,15 @@
   let margin = 100;
 
   const next = () => {
-    if (currentIndex < portraitData.length - 1) {
-      currentIndex++;
-    }
+
+  if(currentIndex === portraitData.length-1 ){
+    editPath()
+  }
+
+  if (currentIndex <= portraitData.length - 2) {
+    currentIndex++;
+  }
+    console.log(currentIndex)
   };
 
   const prev = () => {
@@ -87,7 +90,6 @@
 
   $: addPath = (path, color, index, dataScale) => {
     let currScale = portraitData[currentIndex].scale.toString().split(".")[1];
-    console.log(dataScale)
     if (!selectedElements.includes(index)) {
       selectedElements.push(index);
       if (path.length <= 1) {
@@ -135,15 +137,36 @@
 
   let finished = false;
 
+  let currentElement = null;
+  let rotation = 0;
+
+
   const editPath = () => {
     finished = true;
     Draggable.create(".draggable-path", {
       type: "x,y",
       onDrag: updatePosition,
+      onPress: function() {
+                // Bring the element to the front
+                this.target.parentNode.appendChild(this.target);
+            }
+
     });
 
-    d3.select("#legend").style("opacity", 0.1).style("pointer-events", "none");
-    d3.select("#prev").style("opacity", 0.1).style("pointer-events", "none");
+    document.addEventListener('keydown', (event) => {
+            if (currentElement) {
+                if (event.key === 'r' || event.key === 'R') {
+                    rotation += 15; // Rotate by 15 degrees
+                    gsap.to(currentElement, { rotation: rotation, transformOrigin: "center center" });
+                }
+            }
+        });
+
+
+
+
+    d3.select("#legend").style("opacity", 0).style("pointer-events", "none");
+    d3.select("#prev").style("opacity", 0).style("pointer-events", "none");
     d3.select("#finish").style("opacity", 0).style("pointer-events", "none");
     d3.select("#finishArrow")
       .style("opacity", 0)
@@ -158,15 +181,13 @@
 
   let hoveredLegendPath = null;
 
-  $: console.log(svgWidth)
-
 </script>
 
 <div class="grid-container" bind:clientHeight={height} bind:clientWidth={width}>
   <div class="column left"></div>
   <div class="column middle">
     <div class="row" id="arrowsWrapper"></div>
-    <div class="row" id="question">{portraitData1.question}</div>
+    <div class={finished?"row center":"row"} id="question">{finished?"Fais glisser les formes pour les repositionner":portraitData1.question}</div>
     <div class="row" id="main">
       <div
         id="portraitWrapper"
@@ -175,37 +196,7 @@
       >
         <svg id="portraitSVG" width={svgWidth} height={svgHeight}></svg>
       </div>
-      <div id="editWrapper">
-        <div>
-          <div
-            id="finishArrow"
-            class={currentIndex === portraitData.length - 1
-              ? "show arrow"
-              : "none2 arrow"}
-          >
-            →
-          </div>
-          <div
-            id="finish"
-            class={currentIndex === portraitData.length - 1
-              ? "show button arrow"
-              : "none2 button arrow"}
-            on:click={editPath}
-          >
-            Terminer
-          </div>
-        </div>
-
-        <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
-          <p id="instructions">
-            Fais glisser les formes pour les repositionner
-          </p>
-          <div id="download" class="button" on:click={captureScreenshot}>
-            Télécharger
-          </div>
-        </div>
-      </div>
-      <div id="buttonsWrapper">
+      <div id="buttonsWrapper" class={finished ? "hideFinal" : "showFinal"}>
         <div
           id="prev"
           on:click={prev}
@@ -216,13 +207,17 @@
         <div
           id="next"
           on:click={next}
-          class={currentIndex === portraitData.length - 1
-            ? "none button"
-            : "show button"}
+          class={finished?"none button" :"show button"}
         >
-          NEXT
+          {currentIndex === portraitData.length - 1?"TERMINER":"NEXT"}
         </div>
       </div>
+      <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
+        <div id="download" class={finished?"show button" :"none button"} on:click={captureScreenshot}>
+          Télécharger
+        </div>
+      </div>
+
     </div>
     <div class="row">
       <svg id="legend">
@@ -304,7 +299,7 @@
   }
   .none {
     display: inline-block;
-    opacity: 0.1;
+    opacity: 0;
     pointer-events: none;
   }
 
@@ -312,6 +307,10 @@
     display: none;
     opacity: 0;
     pointer-events: none;
+  }
+
+  .center{
+    justify-content: center;
   }
 
   .show {
@@ -329,7 +328,7 @@
 
   #question {
     font-size:28px;
-    font-weight:700;
+    font-weight:600;
     display: flex;
     align-items: center; /* Vertical center alignment */
   }
@@ -338,6 +337,12 @@
     position: absolute;
     right: 0;
     bottom: 0;
+  }
+
+  #downloadWrapper{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 
   #editWrapper {
@@ -352,10 +357,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-
     width:100%;
   }
 
+  #portraitWrapper,
   #navWrapper{
   height:100%;
   }

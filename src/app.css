@@ -33,6 +33,11 @@ body{
   cursor: pointer;
 }
 
+.button.active{
+  color: white;
+  background: #d9ac4e;
+}
+
 @keyframes arrowAnim {
   0%,
   100% {

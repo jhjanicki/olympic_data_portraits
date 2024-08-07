@@ -1,4 +1,5 @@
 <script>
+  import { language } from "../store/store";
   import { athleteData } from "../assets/data/athleteData.js";
   import Modal from "./Modal.svelte";
   import { modalOpen, selectedAthlete } from "../store/store";
@@ -24,7 +25,7 @@
         value="Athletes"
         bind:group={selectedOption}
       />
-      <label class="toggle toggle-yes" for="option_1">Athlètes</label>
+      <label class="toggle toggle-yes" for="option_1">{$language==="french"?"Athlètes":"Athletes"}</label>
     </div>
     <div class="option">
       <input
@@ -55,7 +56,7 @@
         </div>
       </div>
       <p class="arrow" id="aboutArrow" on:click={() => open(d.id)}>
-        Son portrait ici→
+        {$language==="french"?"Son portrait ici→":"See portrait→"}
       </p>
     </div>
   {/each}

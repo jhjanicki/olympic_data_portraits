@@ -1,6 +1,7 @@
 export const portraitData = [
    {
       "question":"Quelle ville t'\u00e9voque le plus de souvenirs ?",
+      "questionEN":"Which city brings back the most memories?",
       "question_id":"city",
       "x":35,
       "y":60,
@@ -9,6 +10,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Rio",
+            "answerEN":"Rio",
             "color_hex":["#3fb54a","#3fb54a","#525ca9","#f7ed43"],
             "answer_id":"city_rio",
             "paths":[
@@ -20,6 +22,7 @@ export const portraitData = [
          },
          {
             "answer":"Tokyo",
+            "answerEN":"Tokyo",
             "color_hex":["#ef4136"],
             "answer_id":"city_tokyo",
             "paths":[
@@ -28,6 +31,7 @@ export const portraitData = [
          },
          {
             "answer":"Paris",
+            "answerEN":"Paris",
             "color_hex":["#a02d22"],
             "answer_id":"city_paris",
             "paths":[
@@ -38,6 +42,7 @@ export const portraitData = [
    },
    {
       "question":"Quel.le sportif.ve es tu?",
+      "questionEN":"What kind of athlete are you?",
       "question_id":"personality",
       "x":40,
       "y":30,
@@ -46,6 +51,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Talentueux",
+            "answerEN":"Talented",
             "color_hex":["#62b0e3"],
             "answer_id":"personality_talentueux",
             "paths":[
@@ -54,6 +60,7 @@ export const portraitData = [
          },
          {
             "answer":"Consciencieux",
+            "answerEN":"Conscientious",
             "color_hex":["#62b0e3","#62b0e3"],
             "answer_id":"personality_consciencieux",
             "paths":[
@@ -63,6 +70,7 @@ export const portraitData = [
          },
          {
             "answer":"Audacieux",
+            "answerEN":"Audacious",
             "color_hex":["#62b0e3"],
             "answer_id":"personalitly_audacieux",
             "paths":[
@@ -73,6 +81,7 @@ export const portraitData = [
    },
    {
       "question":"Face a\u0300 l'e\u0301chec, je suis pluto\u0302t",
+      "questionEN":"Faced with failure, I feel...",
       "question_id":"failure",
       "x":30,
       "y":40,
@@ -81,6 +90,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Effondre\u0301.e",
+            "answerEN":"Crushed",
             "color_hex":["#64a744"],
             "answer_id":"failure_effondre",
             "paths":[
@@ -89,6 +99,7 @@ export const portraitData = [
          },
          {
             "answer":"E\u0301nerve\u0301.e",
+            "answerEN":"Angry",
             "color_hex":["#64a744"],
             "answer_id":"failure_enerve",
             "paths":[
@@ -97,6 +108,7 @@ export const portraitData = [
          },
          {
             "answer":"De\u0301ja\u0300 surmotive\u0301.e",
+            "answerEN":"More motivated",
             "color_hex":["#64a744"],
             "answer_id":"failure_surmotive",
             "paths":[
@@ -107,6 +119,7 @@ export const portraitData = [
    },
    {
       "question":"Dans la vie tu es pluto\u0302t de nature",
+      "questionEN":"In life, you're more of a...",
       "question_id":"introextra",
       "x":50,
       "y":60,
@@ -115,6 +128,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Introverti.e",
+            "answerEN":"Introvert",
             "color_hex":["#fbe009"],
             "answer_id":"introextra_intro",
             "paths":[
@@ -123,6 +137,7 @@ export const portraitData = [
          },
          {
             "answer":"Extraverti.e",
+            "answerEN":"Extrovert",
             "color_hex":["#fbe009"],
             "answer_id":"introextra_extra",
             "paths":[
@@ -133,6 +148,7 @@ export const portraitData = [
    },
    {
       "question":"Quel est ton sens le plus de\u0301veloppe\u0301 ?",
+      "questionEN":"What is your most developed sense?",
       "question_id":"senses",
       "x":55,
       "y":40,
@@ -141,6 +157,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Ou\u00efe",
+            "answerEN":"Hearing",
             "color_hex":["#4f64ae","#4f64ae","#4f64ae","#4f64ae"],
             "answer_id":"senses_ouie",
             "paths":[
@@ -152,6 +169,7 @@ export const portraitData = [
          },
          {
             "answer":"Vue",
+            "answerEN":"Sight",
             "color_hex":["#bfe6ec"],
             "answer_id":"senses_vue",
             "paths":[
@@ -160,6 +178,7 @@ export const portraitData = [
          },
          {
             "answer":"Toucher",
+            "answerEN":"Touch",
             "color_hex":["#5356a5"],
             "answer_id":"senses_toucher",
             "paths":[
@@ -168,6 +187,7 @@ export const portraitData = [
          },
          {
             "answer":"Go\u00fbt",
+            "answerEN":"Taste",
             "color_hex":["#354c9f","#354c9f"],
             "answer_id":"senses_gout",
             "paths":[
@@ -177,6 +197,7 @@ export const portraitData = [
          },
          {
             "answer":"Odorat",
+            "answerEN":"Scent",
             "color_hex":["#354c9f","#354c9f","#354c9f"],
             "answer_id":"senses_odorat",
             "paths":[
@@ -189,6 +210,7 @@ export const portraitData = [
    },
    {
       "question":"Lequel est ton e\u0301le\u0301ment ?",
+      "questionEN":"What is your element?",
       "question_id":"element",
       "x":45,
       "y":20,
@@ -197,6 +219,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Eau",
+            "answerEN":"Water",
             "color_hex":["#4e8cca"],
             "answer_id":"element_eau",
             "paths":[
@@ -205,6 +228,7 @@ export const portraitData = [
          },
          {
             "answer":"Feu",
+            "answerEN":"Fire",
             "color_hex":["#c64a3a"],
             "answer_id":"element_feu",
             "paths":[
@@ -213,6 +237,7 @@ export const portraitData = [
          },
          {
             "answer":"Air",
+            "answerEN":"Air",
             "color_hex":["#6acde8","#6acde8","#6acde8"],
             "answer_id":"element_air",
             "paths":[
@@ -223,6 +248,7 @@ export const portraitData = [
          },
          {
             "answer":"Terre",
+            "answerEN":"Earth",
             "color_hex":["#c9dc5b"],
             "answer_id":"element_terre",
             "paths":[
@@ -233,6 +259,7 @@ export const portraitData = [
    },
    {
       "question":"Ou\u0300 vas-tu ?",
+      "questionEN":"Where are you heading?",
       "question_id":"direction",
       "x":35,
       "y":45,
@@ -241,6 +268,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Plus loin",
+            "answerEN":"Further",
             "color_hex":["#231f20"],
             "answer_id":"direction_loin",
             "paths":[
@@ -249,6 +277,7 @@ export const portraitData = [
          },
          {
             "answer":"Plus haut",
+            "answerEN":"Higher",
             "color_hex":["#231f20"],
             "answer_id":"direction_haut",
             "paths":[
@@ -257,6 +286,7 @@ export const portraitData = [
          },
          {
             "answer":"Plus fort",
+            "answerEN":"Stronger",
             "color_hex":["#231f20"],
             "answer_id":"direction_fort",
             "paths":[

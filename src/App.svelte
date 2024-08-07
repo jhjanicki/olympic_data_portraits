@@ -1,4 +1,5 @@
 <script>
+  import { language } from "./store/store";
   import { logoData } from "./assets/data/logoData";
   import { portraitData } from "./assets/data/yourPortrait";
   import { onMount } from "svelte";
@@ -55,6 +56,14 @@
   positions[7].y = positions[7].y - 70;
   positions[8].x = positions[8].x + 30;
 
+
+
+  function changeLanguage(selectedLang) {
+    $language = selectedLang;
+    selectedQuestion === "";
+    closeDropdown("",0)
+  }
+
   onMount(() => {
     gWidth = select("#gWrapper").node().getBBox().width;
     gHeight = select("#gWrapper").node().getBBox().height;
@@ -73,6 +82,20 @@
       end: "bottom 150px",
       pin: "#svg",
     });
+
+    ScrollTrigger.create({
+      trigger: "#headerSection",
+      start: "top+=300 top", // When the top of headerSection is 300px from the top of the viewport
+      onEnter: () => {
+          gsap.set("#languageWrapper", { position: "absolute", top: "50px" }); // Adjust top based on your header height
+      },
+      onLeaveBack: () => {
+          gsap.set("#languageWrapper", { position: "fixed", top: "50px" });
+      }
+    });
+
+
+
 
     // animate shapes on scroll
     ids.forEach((d, i) => {
@@ -117,6 +140,20 @@
   };
 </script>
 
+<div id="languageWrapper">
+<div
+  class="button {$language === 'french' ? 'active' : ''}"
+  on:click={() => changeLanguage('french')}
+>
+    Français
+  </div>
+  <div
+    class="button {$language === 'english' ? 'active' : ''}"
+    on:click={() => changeLanguage('english')}
+  >
+    English
+  </div>
+</div>
 <section id="headerSection">
   <div id="titeWrapper">
     <div class="title" id="title"></div>
@@ -139,19 +176,19 @@
               Portraits 2024
             </text>
             <text x="95" y="220" fill="#d9ac4e" font-size="18">
-              Quand l’art et la performance
+              {$language === "french"?"Quand l’art et la performance":"When art and performance"}
             </text>
             <text x="125" y="245" fill="#d9ac4e" font-size="18"
-              >se prennent aux Jeux</text
+              >{$language === "french"?"se prennent aux Jeux":"take on the Games"}</text
             >
             <text x="100" y="320" fill="#d9ac4e" font-size="16"
-              >Une exposition de Blandine Pont
+              >{$language === "french"?"Une exposition de Blandine Pont":"An exhibition by Blandine Pont"}
             </text>
             <text x="150" y="340" fill="#d9ac4e" font-size="16"
-              >et Jeremy Wanner,</text
+              >{$language === "french"?"et Jeremy Wanner,":"and Jeremy Wanner,"}</text
             >
             <text x="110" y="360" fill="#d9ac4e" font-size="16"
-              >labellisée Olympiade Culturelle</text
+              >{$language === "french"?"a form of Cultural Olympiad":""}</text
             >
           </g>
           {#each logoData as d}
@@ -168,37 +205,32 @@
 </section>
 <section id="introWrapper">
   <p class="introText">
-    Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu
-    plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une
-    exposition pensée pour révéler les différentes facettes de 13 athlètes
-    Olympiques et Paralympiques français.e.s au grand public sous une forme
-    ludique et inédite.
+    {$language==="french"?"Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une exposition pensée pour révéler les différentes facettes de 13 athlètes Olympiques et Paralympiques français.e.s au grand public sous une forme ludique et inédite.":"Paris 2024 is fast approaching, and with it the desire to get to know a little more about those who will be at the heart of these Games. Portrait 2024 is an exhibition designed to reveal the different facets of 13 French Olympic and Paralympic athletes to the general public in a fun and original way."
+    }
   </p>
   <p class="introText">
-    Générés à partir de leurs réponses à un questionnaire au sujet de leur vie
-    sportive et sur des aspects plus personnels, découvrez ces portraits colorés
-    au carrefour entre la science des données et l’art.
+    {$language==="french"?"Générés à partir de leurs réponses à un questionnaire au sujet de leur vie sportive et sur des aspects plus personnels, découvrez ces portraits colorés au carrefour entre la science des données et l’art.":"Generated from their answers to a questionnaire about their sporting lives and more personal aspects, discover these colorful portraits at the crossroads between data science and art."}
   </p>
 </section>
 
 <section id="explainWrapper">
   <div class="scroll-arrow">
     ↓<br />
-    <span class="arrow-text">Explorez les questions </span>
+    <span class="arrow-text">{$language==="french"?"Explorez les questions":"Explore the questions"} </span>
   </div>
   <div class={active ? "select-menu active" : "select-menu"}>
     <div class="select-menu-button" on:click={toggleDropdown}>
       <span class="select-menu-text"
         >{selectedQuestion === ""
-          ? "Sélectionnez une question pour voir les formes associées"
+          ? ($language==="french"?"Sélectionnez une question pour voir les formes associées":"Select a question to see the associated shapes")
           : selectedQuestion}</span
       >
       <img id="carrot" class={active ? "flip" : ""} src="carrot.svg" />
     </div>
     <ul class="options">
       {#each portraitData as d, i}
-        <li class="option" on:click={() => closeDropdown(d.question, i)}>
-          <span class="optionText">{d.question}</span>
+        <li class="option" on:click={() => closeDropdown($language==="french"?d.question:d.questionEN, i)}>
+          <span class="optionText">{$language==="french"?d.question:d.questionEN}</span>
         </li>
       {/each}
     </ul>
@@ -228,7 +260,7 @@
                     : ""}
                   y="20"
                   font-size={width&&width < 700?12:16}
-                  >{a.answer}
+                  >{$language==="french"?a.answer:a.answerEN}
                 </text>
               {/each}
             </g>
@@ -282,6 +314,19 @@
 </section>
 
 <style>
+  #languageWrapper {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 50px;
+    transition: all 0.5s ease;
+    z-index:1000;
+  }
+
+  #languageWrapper div{
+    display: inline;
+  }
+
   #chart,
   #chart2,
   #chart3 {
@@ -523,7 +568,7 @@
     #aboutWrapper{
         grid-template-columns: 1fr;
     }
-    
+
   }
 
 </style>

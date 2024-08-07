@@ -1,4 +1,5 @@
 <script>
+  import { language } from "../store/store";
   import { modalOpen, selectedAthlete } from "../store/store";
   import { portraitData } from "../assets/data/athletePortraitsOpen";
 
@@ -13,8 +14,14 @@
   let selectedQuestion = "";
   let selectedAnswer = "";
   function clicked(d) {
-    selectedQuestion = d.question;
-    selectedAnswer = d.answer;
+    if($language==="french"){
+      selectedQuestion = d.question;
+      selectedAnswer = d.answer;
+    }else{
+      selectedQuestion = d.questionEN;
+      selectedAnswer = d.answerEN;
+    }
+
   }
   function closeModal() {
     $modalOpen = false;
@@ -46,7 +53,7 @@
       {/each}</svg
     >
     <div id="textWrapper">
-      <p>{selectedQuestion === "" ? "Cliquez sur une forme" : selectedQuestion}</p>
+      <p>{selectedQuestion === "" ? ($language==="french"?"Cliquez sur une forme":"Click on a shape") : selectedQuestion}</p>
       <p>{selectedAnswer}</p>
     </div>
   </div>
@@ -129,7 +136,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 42%;
+    top: 45%;
     text-align: center;
   }
 

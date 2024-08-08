@@ -1,4 +1,5 @@
 <script>
+  import { language } from "../store/store";
   import { athleteData } from "../assets/data/athleteData.js";
   import Modal from "./Modal.svelte";
   import { modalOpen, selectedAthlete } from "../store/store";
@@ -24,7 +25,7 @@
         value="Athletes"
         bind:group={selectedOption}
       />
-      <label class="toggle toggle-yes" for="option_1">Athletes</label>
+      <label class="toggle toggle-yes" for="option_1">{$language==="french"?"Athlètes":"Athletes"}</label>
     </div>
     <div class="option">
       <input
@@ -55,7 +56,7 @@
         </div>
       </div>
       <p class="arrow" id="aboutArrow" on:click={() => open(d.id)}>
-        see portrait →
+        {$language==="french"?"Son portrait ici→":"See portrait→"}
       </p>
     </div>
   {/each}
@@ -185,7 +186,6 @@
   }
 
   .tw-toggle {
-    /* background: #95A5A6; */
     display: inline-block;
     padding: 0px 0px;
     border-radius: 20px;
@@ -207,7 +207,6 @@
   }
 
   .tw-toggle input {
-    /* display: none; */
     position: absolute;
     z-index: 3;
     opacity: 0;
@@ -229,6 +228,10 @@
     border-bottom-right-radius: 20px;
   }
 
+  .toggle:hover{
+    cursor: pointer;
+  }
+
   .flipPortrait {
     transform: rotateY(180deg);
   }
@@ -238,12 +241,14 @@
     color: black;
     font-size: 16px;
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     left: 10px;
     z-index: 3;
   }
 
   .arrow:hover {
     cursor: pointer;
+    font-weight:600;
+    transition: all 0.5 ease;
   }
 </style>

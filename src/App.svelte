@@ -1,4 +1,5 @@
 <script>
+  import { language } from "./store/store";
   import { logoData } from "./assets/data/logoData";
   import { portraitData } from "./assets/data/yourPortrait";
   import { onMount } from "svelte";
@@ -55,6 +56,14 @@
   positions[7].y = positions[7].y - 70;
   positions[8].x = positions[8].x + 30;
 
+
+
+  function changeLanguage(selectedLang) {
+    $language = selectedLang;
+    selectedQuestion === "";
+    closeDropdown("",0)
+  }
+
   onMount(() => {
     gWidth = select("#gWrapper").node().getBBox().width;
     gHeight = select("#gWrapper").node().getBBox().height;
@@ -73,6 +82,20 @@
       end: "bottom 150px",
       pin: "#svg",
     });
+
+    ScrollTrigger.create({
+      trigger: "#headerSection",
+      start: "top+=300 top", // When the top of headerSection is 300px from the top of the viewport
+      onEnter: () => {
+          gsap.set("#languageWrapper", { position: "absolute", top: "50px" }); // Adjust top based on your header height
+      },
+      onLeaveBack: () => {
+          gsap.set("#languageWrapper", { position: "fixed", top: "50px" });
+      }
+    });
+
+
+
 
     // animate shapes on scroll
     ids.forEach((d, i) => {
@@ -95,15 +118,6 @@
     });
   });
 
-  const start = () => {
-    // select("#headerSection").style("display", "none");
-    // select("#introWrapper").style("display", "none");
-    // select("#questionWrapper").style("display", "inherit");
-    select("body")
-      .style("margin", 0)
-      .style("overflow-y", "hidden")
-      .style("overflow-x", "hidden");
-  };
 
   let legendWidth = 550;
 
@@ -126,6 +140,20 @@
   };
 </script>
 
+<div id="languageWrapper">
+<div
+  class="button {$language === 'french' ? 'active' : ''}"
+  on:click={() => changeLanguage('french')}
+>
+    Français
+  </div>
+  <div
+    class="button {$language === 'english' ? 'active' : ''}"
+    on:click={() => changeLanguage('english')}
+  >
+    English
+  </div>
+</div>
 <section id="headerSection">
   <div id="titeWrapper">
     <div class="title" id="title"></div>
@@ -147,20 +175,20 @@
             <text x="140" y="150" fill="#d9ac4e" font-size="24">
               Portraits 2024
             </text>
-            <text x="95" y="220" fill="#d9ac4e" font-size="18">
-              Quand l’art et la performance
+            <text x={$language === "french"?"95":"105"} y="220" fill="#d9ac4e" font-size="18">
+              {$language === "french"?"Quand l’art et la performance":"When art and performance"}
             </text>
-            <text x="125" y="245" fill="#d9ac4e" font-size="18"
-              >se prennent aux Jeuxs</text
+            <text x={$language === "french"?"125":"140"} y="245" fill="#d9ac4e" font-size="18"
+              >{$language === "french"?"se prennent aux Jeux":"take on the Games"}</text
             >
-            <text x="100" y="320" fill="#d9ac4e" font-size="16"
-              >Une exposition de Blandine Pont
+            <text x={$language === "french"?"100":"107"} y="320" fill="#d9ac4e" font-size="16"
+              >{$language === "french"?"Une exposition de Blandine Pont":"An exhibition by Blandine Pont"}
             </text>
-            <text x="150" y="340" fill="#d9ac4e" font-size="16"
-              >et Jeremy Wanner,</text
+            <text x={$language === "french"?"150":"145"} y="340" fill="#d9ac4e" font-size="16"
+              >{$language === "french"?"et Jeremy Wanner,":"and Jeremy Wanner,"}</text
             >
-            <text x="110" y="360" fill="#d9ac4e" font-size="16"
-              >labellisée Olympiade Culturelle</text
+            <text x={$language === "french"?"108":"115"} y="360" fill="#d9ac4e" font-size="16"
+              >{$language === "french"?"labellisée Olympiade Culturelle":"a form of cultural Olympics"}</text
             >
           </g>
           {#each logoData as d}
@@ -177,44 +205,40 @@
 </section>
 <section id="introWrapper">
   <p class="introText">
-    Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu
-    plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une
-    exposition pensée pour révéler les différentes facettes de 12 athlètes
-    Olympique et Paralympique français.e.s au grand public sous une forme
-    ludique et inédite.
+    {$language==="french"?"Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une exposition pensée pour révéler les différentes facettes de 13 athlètes Olympiques et Paralympiques français.e.s au grand public sous une forme ludique et inédite.":"Paris 2024 is fast approaching, and with it the desire to get to know a little more about those who will be at the heart of these Games. Portrait 2024 is an exhibition designed to reveal the different facets of 13 French Olympic and Paralympic athletes to the general public in a fun and original way."
+    }
   </p>
+  <br>
   <p class="introText">
-    Générés à partir de leurs réponses à un questionnaire au sujet de leur vie
-    sportive et sur des aspects plus personnels, découvrez ces portraits colorés
-    au carrefour entre la science des données et l’art.
+    {$language==="french"?"Générés à partir de leurs réponses à un questionnaire au sujet de leur vie sportive et sur des aspects plus personnels, découvrez ces portraits colorés au carrefour entre la science des données et l’art.":"Generated from their answers to a questionnaire about their sporting and personal lives, discover these colorful portraits at the crossroads between data science and art."}
   </p>
 </section>
 
 <section id="explainWrapper">
   <div class="scroll-arrow">
     ↓<br />
-    <span class="arrow-text">Explore the questions </span>
+    <span class="arrow-text">{$language==="french"?"Explorez les questions":"Explore the questions"} </span>
   </div>
   <div class={active ? "select-menu active" : "select-menu"}>
     <div class="select-menu-button" on:click={toggleDropdown}>
       <span class="select-menu-text"
         >{selectedQuestion === ""
-          ? "Select a question to see the shapes"
+          ? ($language==="french"?"Sélectionnez une question pour voir les formes associées":"Select a question to see the associated shapes")
           : selectedQuestion}</span
       >
       <img id="carrot" class={active ? "flip" : ""} src="carrot.svg" />
     </div>
     <ul class="options">
       {#each portraitData as d, i}
-        <li class="option" on:click={() => closeDropdown(d.question, i)}>
-          <span class="optionText">{d.question}</span>
+        <li class="option" on:click={() => closeDropdown($language==="french"?d.question:d.questionEN, i)}>
+          <span class="optionText">{$language==="french"?d.question:d.questionEN}</span>
         </li>
       {/each}
     </ul>
   </div>
 
-  <div class="legendWrapper">
-    <svg id="legend" width={legendWidth} height={150}>
+  <div class="dropdownWrapper">
+    <svg id="dropdownSVG" width={legendWidth} height={150}>
       <g id={portraitData1.id}>
         {#if dropdownSelected}
           {#each portraitData1.answers as a, i}
@@ -223,7 +247,7 @@
                 <path
                   class="legend"
                   transform={width
-                    ? `translate(${(legendWidth / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`
+                    ? (width < 700 ? `translate(${((legendWidth-100) / (portraitData1.answers.length + 1)) * i + 20},40) scale(0.1)` :`translate(${(legendWidth / (portraitData1.answers.length + 1)) * i + 50},40) scale(0.15)`)
                     : ""}
                   d={path}
                   fill={a.color_hex[pathIndex]}
@@ -231,12 +255,13 @@
 
                 <text
                   x={width
-                    ? (legendWidth / (portraitData1.answers.length + 1)) * i +
-                      50
+                    ? (width < 700? ((legendWidth-100) / (portraitData1.answers.length + 1)) * i +
+                        20:((legendWidth) / (portraitData1.answers.length + 1)) * i +
+                      50)
                     : ""}
                   y="20"
-                  font-size="16"
-                  >{a.answer}
+                  font-size={width&&width < 700?12:16}
+                  >{$language==="french"?a.answer:a.answerEN}
                 </text>
               {/each}
             </g>
@@ -253,17 +278,56 @@
 <div class="scroll-arrow">
   ↓<br />
   <span class="arrow-text"
-    >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
+    >{$language==="french"?"Répondez aux questions ci-dessous et découvrez votre Portrait 2024 !":"Create your own portrait below!"}
   </span>
 </div>
-<div id="start" class="button" on:click={start}>C'est parti!</div>
 
-<section></section>
+<div class="portraitsNav" id="topNav">
+  <p>{$language==="french"?"Votre Portrait 2024":"Your Portrait 2024"}</p>
+</div>
+
+
 <section id="questionWrapper">
   <Question />
 </section>
 
+
+<section id="aboutWrapper" class="aboutText">
+  <div class="column">
+      <p>{$language==="french"?"Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf. Restez connectés pour ne pas manquer les événements associés !":"This project is on display during the Olympic and Paralympic Games at the Samaritaine Paris Pont Neuf. Stay tuned for related events!"} </p>
+
+  </div>
+  <div class="column">
+      <p><b>{$language==="french"?"Équipe :":"Group:"}</b></p>
+      <p>{$language==="french"?"Direction artistique : Blandine Pont et Jeremy Wanner":"Art direction: Blandine Pont and Jeremy Wanner"}</p>
+      <p>{$language==="french"?"Scénographie : Antoine Wanner":"Scenography: Antoine Wanner"}</p>
+      <p>{$language==="french"?"Visualisation interactives et web design: Julia H. Janicki":"Interactive visualization and web dev/design: Julia Janicki"}</p>
+      <p>{$language==="french"?"Motion design : Noémie Joole":"Motion design: Noémie Joole"}</p>
+      <p>{$language==="french"?"Communication : Sophie Gaonach":"Communication: Sophie Gaonach"} </p>
+  </div>
+  <div class="column">
+      <p><b>{$language==="french"?"Contact :":"Get in touch"}</b></p>
+      <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">{$language==="french"?"Nous écrire":"Email"}</a></p>
+      <p> <a href="https://www.instagram.com/blandinepnt/">Blandine Pont</a></p>
+      <p> <a href="https://www.instagram.com/oiiwatelier/">Jeremy Wanner</a></p>
+  </div>
+
+</section>
+
 <style>
+  #languageWrapper {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 50px;
+    transition: all 0.5s ease;
+    z-index:1000;
+  }
+
+  #languageWrapper div{
+    display: inline;
+  }
+
   #chart,
   #chart2,
   #chart3 {
@@ -307,15 +371,42 @@
   #explainWrapper {
     margin: 100px 0px;
     text-align: center;
+    width:100%;
   }
 
   #questionWrapper {
     /* display: none; */
     margin-top: 0px;
+    width:100%;
     height: 100vh;
   }
 
-  #legend{
+  #aboutWrapper{
+    width: 100%;
+    background: #d9ac4e;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    text-align:left;
+  }
+
+  #aboutWrapper p{
+    margin:0px;
+  }
+
+  #aboutWrapper .column{
+    padding: 20px;
+  }
+
+  .aboutText {
+    width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+  }
+
+  #dropdownSVG{
     margin: 0px auto;
   }
 
@@ -342,8 +433,27 @@
     margin-bottom: 50px;
   }
 
+  #topNav{
+    margin-top:50px;
+  }
+
+  .portraitsNav{
+    background-color:#d9ac4e;
+    height:30px;
+    width:100%;
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;
+    color: white;
+  }
+
   @media (max-width: 700px) {
     .introText {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .aboutText {
       width: 90%;
       margin-left: auto;
       margin-right: auto;
@@ -372,6 +482,7 @@
   }
 
   .options {
+    list-style-type: none;
     position: absolute;
     width: 498px;
     overflow-y: auto;
@@ -445,4 +556,20 @@
       opacity: 0;
     }
   }
+
+  @media (max-width: 498px) {
+    .options{
+      width: calc(100% - 18px);
+    }
+
+  }
+
+  @media (max-width: 600px) {
+
+    #aboutWrapper{
+        grid-template-columns: 1fr;
+    }
+
+  }
+
 </style>

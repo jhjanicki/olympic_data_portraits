@@ -1,4 +1,5 @@
 <script>
+  import { language } from "../store/store";
   import { portraitData } from "../assets/data/yourPortrait";
   import html2canvas from "html2canvas";
   import * as d3 from "d3";
@@ -187,7 +188,7 @@
   <div class="column left"></div>
   <div class="column middle">
     <div class="row" id="arrowsWrapper"></div>
-    <div class={finished?"row center":"row"} id="question">{finished?"Fais glisser les formes pour les repositionner":portraitData1.question}</div>
+    <div class={finished?"row center":"row"} id="question">{finished?($language==="french"?"Fais glisser les formes pour les repositionner":"Drag shapes to reposition"):($language==="french"?portraitData1.question:portraitData1.questionEN)}</div>
     <div class="row" id="main">
       <div
         id="portraitWrapper"
@@ -214,7 +215,7 @@
       </div>
       <div id="downloadWrapper" class={finished ? "showFinal" : "hideFinal"}>
         <div id="download" class={finished?"show button" :"none button"} on:click={captureScreenshot}>
-          Télécharger
+          {$language==="french"?"Télécharger":"Download"}
         </div>
       </div>
 
@@ -254,7 +255,7 @@
                     : ""}
                   y="20"
                   font-size={width && width<700? 12 : 18}
-                  >{a.answer}
+                  >{$language==="french"?a.answer:a.answerEN}
                 </text>
               {/each}
             </g>

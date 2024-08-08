@@ -175,20 +175,20 @@
             <text x="140" y="150" fill="#d9ac4e" font-size="24">
               Portraits 2024
             </text>
-            <text x="95" y="220" fill="#d9ac4e" font-size="18">
+            <text x={$language === "french"?"95":"105"} y="220" fill="#d9ac4e" font-size="18">
               {$language === "french"?"Quand l’art et la performance":"When art and performance"}
             </text>
-            <text x="125" y="245" fill="#d9ac4e" font-size="18"
+            <text x={$language === "french"?"125":"140"} y="245" fill="#d9ac4e" font-size="18"
               >{$language === "french"?"se prennent aux Jeux":"take on the Games"}</text
             >
-            <text x="100" y="320" fill="#d9ac4e" font-size="16"
+            <text x={$language === "french"?"100":"107"} y="320" fill="#d9ac4e" font-size="16"
               >{$language === "french"?"Une exposition de Blandine Pont":"An exhibition by Blandine Pont"}
             </text>
-            <text x="150" y="340" fill="#d9ac4e" font-size="16"
+            <text x={$language === "french"?"150":"145"} y="340" fill="#d9ac4e" font-size="16"
               >{$language === "french"?"et Jeremy Wanner,":"and Jeremy Wanner,"}</text
             >
-            <text x="110" y="360" fill="#d9ac4e" font-size="16"
-              >{$language === "french"?"a form of Cultural Olympiad":""}</text
+            <text x={$language === "french"?"108":"115"} y="360" fill="#d9ac4e" font-size="16"
+              >{$language === "french"?"labellisée Olympiade Culturelle":"a form of cultural Olympics"}</text
             >
           </g>
           {#each logoData as d}
@@ -208,8 +208,9 @@
     {$language==="french"?"Paris 2024 approche à grands pas et avec lui l’envie de connaître un peu plus celles et ceux qui seront au coeur de ces Jeux. Portrait 2024 est une exposition pensée pour révéler les différentes facettes de 13 athlètes Olympiques et Paralympiques français.e.s au grand public sous une forme ludique et inédite.":"Paris 2024 is fast approaching, and with it the desire to get to know a little more about those who will be at the heart of these Games. Portrait 2024 is an exhibition designed to reveal the different facets of 13 French Olympic and Paralympic athletes to the general public in a fun and original way."
     }
   </p>
+  <br>
   <p class="introText">
-    {$language==="french"?"Générés à partir de leurs réponses à un questionnaire au sujet de leur vie sportive et sur des aspects plus personnels, découvrez ces portraits colorés au carrefour entre la science des données et l’art.":"Generated from their answers to a questionnaire about their sporting lives and more personal aspects, discover these colorful portraits at the crossroads between data science and art."}
+    {$language==="french"?"Générés à partir de leurs réponses à un questionnaire au sujet de leur vie sportive et sur des aspects plus personnels, découvrez ces portraits colorés au carrefour entre la science des données et l’art.":"Generated from their answers to a questionnaire about their sporting and personal lives, discover these colorful portraits at the crossroads between data science and art."}
   </p>
 </section>
 
@@ -277,12 +278,12 @@
 <div class="scroll-arrow">
   ↓<br />
   <span class="arrow-text"
-    >Répondez aux questions ci-dessous et découvrez votre Portrait 2024!
+    >{$language==="french"?"Répondez aux questions ci-dessous et découvrez votre Portrait 2024 !":"Create your own portrait below!"}
   </span>
 </div>
 
 <div class="portraitsNav" id="topNav">
-  <p>Votre Portrait 2024</p>
+  <p>{$language==="french"?"Votre Portrait 2024":"Your Portrait 2024"}</p>
 </div>
 
 
@@ -293,20 +294,20 @@
 
 <section id="aboutWrapper" class="aboutText">
   <div class="column">
-      <p>Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf.<br> Restez connectés pour ne pas manquer les événements associés ! </p>
+      <p>{$language==="french"?"Ce projet est exposé pendant les Jeux Olympiques et Paralympiques à la Samaritaine Paris Pont Neuf. Restez connectés pour ne pas manquer les événements associés !":"This project is on display during the Olympic and Paralympic Games at the Samaritaine Paris Pont Neuf. Stay tuned for related events!"} </p>
 
   </div>
   <div class="column">
-      <p><b>Équipe :</b></p>
-      <p>Direction artistique : Blandine Pont et Jeremy Wanner</p>
-      <p>Scénographie : Antoine Wanner</p>
-      <p>Visualisation interactives et web design: Julia H. Janicki</p>
-      <p>Motion design : Noémie Joole</p>
-      <p>Communication : Sophie Gaonach </p>
+      <p><b>{$language==="french"?"Équipe :":"Group:"}</b></p>
+      <p>{$language==="french"?"Direction artistique : Blandine Pont et Jeremy Wanner":"Art direction: Blandine Pont and Jeremy Wanner"}</p>
+      <p>{$language==="french"?"Scénographie : Antoine Wanner":"Scenography: Antoine Wanner"}</p>
+      <p>{$language==="french"?"Visualisation interactives et web design: Julia H. Janicki":"Interactive visualization and web dev/design: Julia Janicki"}</p>
+      <p>{$language==="french"?"Motion design : Noémie Joole":"Motion design: Noémie Joole"}</p>
+      <p>{$language==="french"?"Communication : Sophie Gaonach":"Communication: Sophie Gaonach"} </p>
   </div>
   <div class="column">
-      <p><b>Contact :</b></p>
-      <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">Nous écrire</a></p>
+      <p><b>{$language==="french"?"Contact :":"Get in touch"}</b></p>
+      <p> <a href="mailto:portraits_2024@oiiwa.com?subject=Portraits 2024">{$language==="french"?"Nous écrire":"Email"}</a></p>
       <p> <a href="https://www.instagram.com/blandinepnt/">Blandine Pont</a></p>
       <p> <a href="https://www.instagram.com/oiiwatelier/">Jeremy Wanner</a></p>
   </div>

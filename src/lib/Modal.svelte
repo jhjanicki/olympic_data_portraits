@@ -48,8 +48,6 @@
             ></path>
           {/each}
         </g>
-        <!-- <text x="200" y="480" font-size="30">{selectedQuestion}</text>
-        <text x="450" y="550" font-size="30">{selectedAnswer}</text> -->
       {/each}</svg
     >
     <div id="textWrapper">

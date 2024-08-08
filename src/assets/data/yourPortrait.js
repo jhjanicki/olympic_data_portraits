@@ -119,7 +119,7 @@ export const portraitData = [
    },
    {
       "question":"Dans la vie tu es pluto\u0302t de nature",
-      "questionEN":"In life, you're more of a...",
+      "questionEN":"Throughout life, you're more of a...",
       "question_id":"introextra",
       "x":50,
       "y":60,
@@ -268,7 +268,7 @@ export const portraitData = [
       "answers":[
          {
             "answer":"Plus loin",
-            "answerEN":"Further",
+            "answerEN":"Farther",
             "color_hex":["#231f20"],
             "answer_id":"direction_loin",
             "paths":[
